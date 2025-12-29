@@ -11,8 +11,8 @@ Provides simple functions to convert between R color names and hexadecimal color
 \seealso{
 Useful links:
 \itemize{
-  \item \url{https://github.com/AnttiRask/col2hex2col}
-  \item Report bugs at \url{https://github.com/AnttiRask/col2hex2col/issues}
+  \item \url{https://github.com/AnttiRask/color-to-hex-to-color}
+  \item Report bugs at \url{https://github.com/AnttiRask/color-to-hex-to-color/issues}
 }
 
 }
