@@ -2,7 +2,9 @@
 
 0 errors | 0 warnings | 1 note
 
-* This is a new release.
+* This is a new release (first submission to CRAN).
+
+The NOTE about "New submission" is expected for a first-time submission.
 
 ## Test environments
 
@@ -11,6 +13,8 @@
 * GitHub Actions (windows-latest): release
 * GitHub Actions (macos-latest): release
 
-## Downstream dependencies
+All tests pass on all platforms.
 
-There are currently no downstream dependencies for this package.
+## Reverse dependencies
+
+There are currently no reverse dependencies for this package.
