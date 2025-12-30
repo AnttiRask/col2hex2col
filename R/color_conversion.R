@@ -1,11 +1,49 @@
 #' Convert Color Names to Hex Codes
 #'
-#' @param color A character vector of color names (e.g., "red", "blue")
-#' @return A character vector of hex color codes
+#' Converts R color names to their hexadecimal color code representations.
+#' This function accepts any valid R color name from the 657 built-in colors
+#' available in \code{\link[grDevices]{colors}}.
+#'
+#' @param color A character vector of R color names (e.g., "red", "blue", "skyblue").
+#'   Color names are case-sensitive and must match exactly as returned by
+#'   \code{\link[grDevices]{colors}}.
+#'
+#' @return A character vector of hexadecimal color codes in the format "#RRGGBB",
+#'   where each pair of characters represents the red, green, and blue components
+#'   in hexadecimal notation (00-FF). The returned vector has the same length as
+#'   the input.
+#'
+#' @details
+#' The function performs input validation and will raise an error if:
+#' \itemize{
+#'   \item The input is not a character vector
+#'   \item Any NA values are present
+#'   \item Any invalid color names are provided
+#' }
+#'
+#' This function is vectorized and efficiently handles both single colors and
+#' vectors of multiple colors.
+#'
+#' @seealso
+#' \code{\link{hex_to_color}} for the reverse conversion,
+#' \code{\link[grDevices]{colors}} for available color names,
+#' \code{\link[grDevices]{col2rgb}} for the underlying conversion function
+#'
 #' @export
 #' @examples
+#' # Convert a single color
 #' color_to_hex("red")
+#'
+#' # Convert multiple colors
 #' color_to_hex(c("red", "blue", "green"))
+#'
+#' # Works with all R color names
+#' color_to_hex(c("skyblue", "coral", "chartreuse"))
+#'
+#' # Use in a data visualization context
+#' colors <- c("steelblue", "firebrick", "forestgreen")
+#' hex_codes <- color_to_hex(colors)
+#' # hex_codes can now be used with plotting functions
 color_to_hex <- function(color) {
   # Input validation
   if (!is.character(color)) {
@@ -32,12 +70,58 @@ color_to_hex <- function(color) {
 
 #' Convert Hex Codes to Color Names
 #'
-#' @param hex A character vector of hex color codes (e.g., "#FF0000")
-#' @return A character vector of color names (NA if no exact match found)
+#' Converts hexadecimal color codes to their corresponding R color names.
+#' This function searches through R's built-in color names to find exact matches
+#' for the provided hex codes.
+#'
+#' @param hex A character vector of hexadecimal color codes in the format "#RRGGBB"
+#'   (e.g., "#FF0000", "#0000FF"). The hash symbol (#) is required, and the hex
+#'   code is case-insensitive. Each component (RR, GG, BB) must be a two-digit
+#'   hexadecimal value (00-FF).
+#'
+#' @return A character vector of R color names. If a hex code does not have a
+#'   corresponding named color in R's color palette, \code{NA} is returned for
+#'   that element. The returned vector has the same length as the input.
+#'
+#' @details
+#' The function performs input validation and will raise an error if:
+#' \itemize{
+#'   \item The input is not a character vector
+#'   \item Any NA values are present
+#'   \item Any hex codes are not in the correct "#RRGGBB" format
+#' }
+#'
+#' This function is case-insensitive for the hex values (e.g., "#FF0000" and
+#' "#ff0000" are treated identically). When multiple color names map to the same
+#' hex code, the first color name in R's \code{\link[grDevices]{colors}} list is
+#' returned.
+#'
+#' Note that not all possible hex codes have corresponding named colors in R.
+#' R provides 657 unique color names, but many hex codes will not have exact matches.
+#'
+#' @seealso
+#' \code{\link{color_to_hex}} for the reverse conversion,
+#' \code{\link[grDevices]{colors}} for available color names,
+#' \code{\link[grDevices]{rgb}} for creating hex codes from RGB values
+#'
 #' @export
 #' @examples
+#' # Convert a single hex code
 #' hex_to_color("#FF0000")
-#' hex_to_color(c("#FF0000", "#0000FF"))
+#'
+#' # Convert multiple hex codes
+#' hex_to_color(c("#FF0000", "#0000FF", "#00FF00"))
+#'
+#' # Case insensitive
+#' hex_to_color("#ff0000")  # Same as "#FF0000"
+#'
+#' # Returns NA for colors without named equivalents
+#' hex_to_color("#123456")
+#'
+#' # Round-trip conversion
+#' original <- c("red", "blue", "green")
+#' hex_codes <- color_to_hex(original)
+#' hex_to_color(hex_codes)  # Returns original color names
 hex_to_color <- function(hex) {
   # Input validation
   if (!is.character(hex)) {

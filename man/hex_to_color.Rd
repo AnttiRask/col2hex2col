@@ -7,15 +7,57 @@
 hex_to_color(hex)
 }
 \arguments{
-\item{hex}{A character vector of hex color codes (e.g., "#FF0000")}
+\item{hex}{A character vector of hexadecimal color codes in the format "#RRGGBB"
+(e.g., "#FF0000", "#0000FF"). The hash symbol (#) is required, and the hex
+code is case-insensitive. Each component (RR, GG, BB) must be a two-digit
+hexadecimal value (00-FF).}
 }
 \value{
-A character vector of color names (NA if no exact match found)
+A character vector of R color names. If a hex code does not have a
+corresponding named color in R's color palette, \code{NA} is returned for
+that element. The returned vector has the same length as the input.
 }
 \description{
-Convert Hex Codes to Color Names
+Converts hexadecimal color codes to their corresponding R color names.
+This function searches through R's built-in color names to find exact matches
+for the provided hex codes.
+}
+\details{
+The function performs input validation and will raise an error if:
+\itemize{
+\item The input is not a character vector
+\item Any NA values are present
+\item Any hex codes are not in the correct "#RRGGBB" format
+}
+
+This function is case-insensitive for the hex values (e.g., "#FF0000" and
+"#ff0000" are treated identically). When multiple color names map to the same
+hex code, the first color name in R's \code{\link[grDevices]{colors}} list is
+returned.
+
+Note that not all possible hex codes have corresponding named colors in R.
+R provides 657 unique color names, but many hex codes will not have exact matches.
 }
 \examples{
+# Convert a single hex code
 hex_to_color("#FF0000")
-hex_to_color(c("#FF0000", "#0000FF"))
+
+# Convert multiple hex codes
+hex_to_color(c("#FF0000", "#0000FF", "#00FF00"))
+
+# Case insensitive
+hex_to_color("#ff0000")  # Same as "#FF0000"
+
+# Returns NA for colors without named equivalents
+hex_to_color("#123456")
+
+# Round-trip conversion
+original <- c("red", "blue", "green")
+hex_codes <- color_to_hex(original)
+hex_to_color(hex_codes)  # Returns original color names
+}
+\seealso{
+\code{\link{color_to_hex}} for the reverse conversion,
+\code{\link[grDevices]{colors}} for available color names,
+\code{\link[grDevices]{rgb}} for creating hex codes from RGB values
 }
