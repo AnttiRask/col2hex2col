@@ -13,3 +13,5 @@
 ^CRAN_SUBMISSION_GUIDE\.md$
 ^submit_cran\.R$
 ^cran-comments\.md$
+^CRAN-SUBMISSION$
+^hex-col2hex2col\.png$
