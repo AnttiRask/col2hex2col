@@ -1,7 +1,7 @@
 # col2hex2col
 
 <!-- badges: start -->
-[![R-CMD-check](https://github.com/AnttiRask/color-to-hex-to-color/workflows/R-CMD-check/badge.svg)](https://github.com/AnttiRask/color-to-hex-to-color/actions)
+[![R-CMD-check](https://github.com/AnttiRask/col2hex2col/workflows/R-CMD-check/badge.svg)](https://github.com/AnttiRask/col2hex2col/actions)
 [![CRAN status](https://www.r-pkg.org/badges/version/col2hex2col)](https://CRAN.R-project.org/package=col2hex2col)
 [![Lifecycle: stable](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://lifecycle.r-lib.org/articles/stages.html#stable)
 <!-- badges: end -->
@@ -16,7 +16,7 @@ You can install the development version from GitHub:
 
 ```r
 # install.packages("devtools")
-devtools::install_github("AnttiRask/color-to-hex-to-color")
+devtools::install_github("AnttiRask/col2hex2col")
 ```
 
 Once published to CRAN, you'll be able to install with:

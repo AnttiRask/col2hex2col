@@ -19,5 +19,5 @@ Imports:
     grDevices
 Depends:
     R (>= 3.5.0)
-URL: https://github.com/AnttiRask/color-to-hex-to-color
-BugReports: https://github.com/AnttiRask/color-to-hex-to-color/issues
+URL: https://github.com/AnttiRask/col2hex2col
+BugReports: https://github.com/AnttiRask/col2hex2col/issues
