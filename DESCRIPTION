@@ -1,7 +1,7 @@
 Package: col2hex2col
 Type: Package
 Title: Convert Between Color Names and Hex Codes
-Version: 0.1.1
+Version: 0.1.2
 Authors@R: person("Antti", "Rask", email = "anttilennartrask@gmail.com",
                   role = c("aut", "cre"))
 Description: Provides simple functions to convert between R color names and

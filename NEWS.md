@@ -1,3 +1,9 @@
+# col2hex2col 0.1.2
+
+## Bug Fixes
+
+* Fixed duplicate "Author" and "See Also" sections in package documentation
+
 # col2hex2col 0.1.1
 
 ## Documentation Improvements

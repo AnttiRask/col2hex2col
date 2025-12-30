@@ -13,16 +13,6 @@
 #' The package uses only base R and the grDevices package, ensuring minimal
 #' dependencies and fast performance.
 #'
-#' @section Author:
-#' Antti Rask
-#'
-#' @section See Also:
-#' Useful links:
-#' \itemize{
-#'   \item \url{https://github.com/AnttiRask/col2hex2col}
-#'   \item Report bugs at \url{https://github.com/AnttiRask/col2hex2col/issues}
-#' }
-#'
 #' @keywords internal
 "_PACKAGE"
 
