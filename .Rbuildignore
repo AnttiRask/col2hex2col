@@ -11,5 +11,5 @@
 ^functions\.R$
 ^PACKAGE_SUMMARY\.md$
 ^CRAN_SUBMISSION_GUIDE\.md$
-^submit_to_cran\.R$
+^submit_cran\.R$
 ^cran-comments\.md$
