@@ -13,14 +13,14 @@ code is case-insensitive. Each component (RR, GG, BB) must be a two-digit
 hexadecimal value (00-FF).}
 }
 \value{
-A character vector of R color names. If a hex code does not have a
-corresponding named color in R's color palette, \code{NA} is returned for
-that element. The returned vector has the same length as the input.
+A character vector of color names (in lowercase). If a hex code does not have a
+corresponding named color in the database, \code{NA} is returned for that element.
+The returned vector has the same length as the input.
 }
 \description{
-Converts hexadecimal color codes to their corresponding R color names.
-This function searches through R's built-in color names to find exact matches
-for the provided hex codes.
+Converts hexadecimal color codes to their corresponding color names.
+This function searches through an extensive database of over 32,000 color names,
+prioritizing R's built-in color names when available.
 }
 \details{
 The function performs input validation and will raise an error if:
@@ -31,12 +31,19 @@ The function performs input validation and will raise an error if:
 }
 
 This function is case-insensitive for the hex values (e.g., "#FF0000" and
-"#ff0000" are treated identically). When multiple color names map to the same
-hex code, the first color name in R's \code{\link[grDevices]{colors}} list is
-returned.
+"#ff0000" are treated identically).
 
-Note that not all possible hex codes have corresponding named colors in R.
-R provides 657 unique color names, but many hex codes will not have exact matches.
+\strong{Name Selection Strategy}: When multiple color names map to the same hex code:
+\enumerate{
+\item R's built-in color names are prioritized (from \code{\link[grDevices]{colors}})
+\item If no R color exists, the shortest name from the extended database is returned
+}
+
+This ensures backward compatibility with R's color system while providing coverage
+for the 32,161 unique hex codes in the extended database.
+
+The extended database includes colors from \url{https://github.com/meodai/color-names},
+significantly increasing the likelihood of finding a named match for any given hex code.
 }
 \examples{
 # Convert a single hex code
@@ -48,8 +55,11 @@ hex_to_color(c("#FF0000", "#0000FF", "#00FF00"))
 # Case insensitive
 hex_to_color("#ff0000")  # Same as "#FF0000"
 
-# Returns NA for colors without named equivalents
-hex_to_color("#123456")
+# Works with extended color database
+hex_to_color("#FF6347")  # Returns a descriptive color name
+
+# Returns NA for colors without named equivalents (rare)
+hex_to_color("#ABCDEF")
 
 # Round-trip conversion
 original <- c("red", "blue", "green")
@@ -58,6 +68,5 @@ hex_to_color(hex_codes)  # Returns original color names
 }
 \seealso{
 \code{\link{color_to_hex}} for the reverse conversion,
-\code{\link[grDevices]{colors}} for available color names,
-\code{\link[grDevices]{rgb}} for creating hex codes from RGB values
+\code{\link[grDevices]{colors}} for R's built-in color names
 }

@@ -67,3 +67,41 @@ test_that("hex_to_color handles white and black", {
   expect_equal(hex_to_color("#FFFFFF"), "white")
   expect_equal(hex_to_color("#000000"), "black")
 })
+
+test_that("hex_to_color prioritizes R colors", {
+  # Test that R colors are returned when available
+  # #FF0000 should return "red" (R color) not any extended name
+  expect_equal(hex_to_color("#FF0000"), "red")
+  expect_equal(hex_to_color("#0000FF"), "blue")
+  expect_equal(hex_to_color("#00FF00"), "green")
+})
+
+test_that("hex_to_color works with extended database", {
+  # Test that extended colors are found
+  # These hex codes should now have names from extended database
+  result1 <- hex_to_color("#FD5E53")  # sunset orange
+  result2 <- hex_to_color("#66C3D0")  # arctic ocean
+
+  # Should return character strings (not NA)
+  expect_type(result1, "character")
+  expect_type(result2, "character")
+  expect_false(is.na(result1))
+  expect_false(is.na(result2))
+})
+
+test_that("hex_to_color returns shortest name for non-R colors", {
+  # For non-R colors, should return shortest available name
+  # Test a few random hex codes from extended database
+  result <- hex_to_color("#FD5E53")
+  expect_type(result, "character")
+  # Should not be excessively long (shortest name strategy)
+  expect_true(nchar(result) < 50)
+})
+
+test_that("hex_to_color backward compatibility with R colors", {
+  # Ensure all common R colors still return expected names
+  r_hex_codes <- c("#FF0000", "#0000FF", "#00FF00", "#FFFF00", "#00FFFF", "#FF00FF")
+  r_names <- c("red", "blue", "green", "yellow", "cyan", "magenta")
+  result <- hex_to_color(r_hex_codes)
+  expect_equal(result, r_names)
+})

@@ -7,9 +7,9 @@
 color_to_hex(color)
 }
 \arguments{
-\item{color}{A character vector of R color names (e.g., "red", "blue", "skyblue").
-Color names are case-sensitive and must match exactly as returned by
-\code{\link[grDevices]{colors}}.}
+\item{color}{A character vector of color names (e.g., "red", "blue", "sunset orange").
+Color names are case-insensitive and whitespace is trimmed. Spaces within color
+names are preserved (e.g., "sky blue" is different from "skyblue").}
 }
 \value{
 A character vector of hexadecimal color codes in the format "#RRGGBB",
@@ -18,9 +18,10 @@ in hexadecimal notation (00-FF). The returned vector has the same length as
 the input.
 }
 \description{
-Converts R color names to their hexadecimal color code representations.
-This function accepts any valid R color name from the 657 built-in colors
-available in \code{\link[grDevices]{colors}}.
+Converts color names to their hexadecimal color code representations.
+This function accepts color names from an extensive database of over 32,000
+color names, including all 657 built-in R colors from \code{\link[grDevices]{colors}}
+plus the comprehensive color-names database from \url{https://github.com/meodai/color-names}.
 }
 \details{
 The function performs input validation and will raise an error if:
@@ -31,7 +32,12 @@ The function performs input validation and will raise an error if:
 }
 
 This function is vectorized and efficiently handles both single colors and
-vectors of multiple colors.
+vectors of multiple colors. The extended database includes 32,462 unique
+color names from various sources, making it suitable for a wide range of
+color specification needs.
+
+Color name matching is case-insensitive: "Red", "red", and "RED" all match
+the same color.
 }
 \examples{
 # Convert a single color
@@ -43,6 +49,12 @@ color_to_hex(c("red", "blue", "green"))
 # Works with all R color names
 color_to_hex(c("skyblue", "coral", "chartreuse"))
 
+# Also works with extended color names
+color_to_hex(c("sunset orange", "arctic ocean", "forest green"))
+
+# Case insensitive
+color_to_hex(c("Red", "BLUE", "Green"))
+
 # Use in a data visualization context
 colors <- c("steelblue", "firebrick", "forestgreen")
 hex_codes <- color_to_hex(colors)
@@ -50,6 +62,5 @@ hex_codes <- color_to_hex(colors)
 }
 \seealso{
 \code{\link{hex_to_color}} for the reverse conversion,
-\code{\link[grDevices]{colors}} for available color names,
-\code{\link[grDevices]{col2rgb}} for the underlying conversion function
+\code{\link[grDevices]{colors}} for R's built-in color names
 }

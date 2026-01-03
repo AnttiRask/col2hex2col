@@ -54,3 +54,35 @@ test_that("color_to_hex handles all base R colors", {
   expect_length(result, length(sample_colors))
   expect_true(all(grepl("^#[0-9A-F]{6}$", result)))
 })
+
+test_that("color_to_hex works with extended color names", {
+  # Test extended color database
+  extended_colors <- c("sunset orange", "arctic ocean", "forestgreen")
+  result <- color_to_hex(extended_colors)
+  expect_length(result, length(extended_colors))
+  expect_true(all(grepl("^#[0-9A-F]{6}$", result)))
+  # Verify specific known values
+  expect_equal(color_to_hex("sunset orange"), "#FD5E53")
+  expect_equal(color_to_hex("arctic ocean"), "#66C3D0")
+})
+
+test_that("color_to_hex is case insensitive", {
+  # Test case insensitivity
+  expect_equal(color_to_hex("red"), color_to_hex("RED"))
+  expect_equal(color_to_hex("blue"), color_to_hex("Blue"))
+  expect_equal(color_to_hex("forestgreen"), color_to_hex("FORESTGREEN"))
+})
+
+test_that("color_to_hex handles whitespace", {
+  # Test trimming
+  expect_equal(color_to_hex(" red "), color_to_hex("red"))
+  expect_equal(color_to_hex("  blue  "), color_to_hex("blue"))
+})
+
+test_that("color_to_hex backward compatibility", {
+  # Ensure R colors still work exactly as before
+  r_colors <- c("red", "blue", "green", "yellow", "cyan", "magenta")
+  result <- color_to_hex(r_colors)
+  expected <- c("#FF0000", "#0000FF", "#00FF00", "#FFFF00", "#00FFFF", "#FF00FF")
+  expect_equal(result, expected)
+})

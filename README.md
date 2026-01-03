@@ -8,7 +8,9 @@
 
 ## Overview
 
-**col2hex2col** provides fast and simple functions to convert between R color names and hexadecimal color codes. The name is a playful reference to "2 Fast 2 Furious" - because color conversion should be both fun and fast!
+**col2hex2col** provides fast and simple functions to convert between color names and hexadecimal color codes. The package now supports an extensive database of over **32,000 color names**, including all 657 R built-in colors plus the comprehensive color-names database.
+
+The name is a playful reference to "2 Fast 2 Furious" - because color conversion should be both fun and fast!
 
 ## Installation
 
@@ -43,6 +45,10 @@ color_to_hex(c("red", "blue", "green"))
 # Works with all 657 R color names
 color_to_hex(c("skyblue", "coral", "chartreuse"))
 #> [1] "#87CEEB" "#FF7F50" "#7FFF00"
+
+# Also works with 32,000+ extended color names!
+color_to_hex(c("sunset orange", "arctic ocean"))
+#> [1] "#FD5E53" "#66C3D0"
 ```
 
 ### Convert hex codes to color names
@@ -73,11 +79,14 @@ hex_to_color(hex_codes)
 
 ## Features
 
-- **Fast**: Uses base R functions with minimal dependencies
+- **Extensive Database**: 32,000+ color names including all R colors and the color-names database
+- **Fast**: Pre-built lookup tables for instant color conversion
 - **Simple**: Just two functions to remember
+- **Backward Compatible**: R colors are prioritized, ensuring existing code works unchanged
+- **Case Insensitive**: "Red", "red", and "RED" all work the same
 - **Vectorized**: Works with single values or vectors
 - **Validated**: Comprehensive input validation and error messages
-- **Tested**: Extensive test coverage with testthat
+- **Tested**: Extensive test coverage with testthat (67 tests)
 
 ## Why col2hex2col?
 

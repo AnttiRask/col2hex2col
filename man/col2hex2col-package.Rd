@@ -6,22 +6,37 @@
 \alias{col2hex2col-package}
 \title{col2hex2col: Convert Between Color Names and Hex Codes}
 \description{
-Provides simple functions to convert between R color names and hexadecimal color codes. The package includes bidirectional conversion functions that work with single colors or vectors of colors.
+Provides simple functions to convert between color names and hexadecimal color codes using an extensive database of over 32,000 colors. Includes all 657 R built-in colors plus the comprehensive color-names database. The package supports bidirectional conversion with backward compatibility, prioritizing R colors when available.
 }
 \details{
 The col2hex2col package provides two main functions for bidirectional conversion
-between R color names and hexadecimal color codes:
+between color names and hexadecimal color codes:
 
 \itemize{
-\item \code{\link{color_to_hex}}: Converts R color names to hex codes
-\item \code{\link{hex_to_color}}: Converts hex codes to R color names
+\item \code{\link{color_to_hex}}: Converts color names to hex codes
+\item \code{\link{hex_to_color}}: Converts hex codes to color names
 }
 
-Both functions are fully vectorized, include comprehensive input validation,
-and work with R's 657 built-in color names from \code{\link[grDevices]{colors}}.
+Both functions are fully vectorized and include comprehensive input validation.
+The package now supports an extensive database of over 32,000 color names:
 
-The package uses only base R and the grDevices package, ensuring minimal
-dependencies and fast performance.
+\itemize{
+\item 657 R built-in colors from \code{\link[grDevices]{colors}}
+\item 31,852+ colors from the color-names database (\url{https://github.com/meodai/color-names})
+}
+
+\strong{Key Features:}
+\itemize{
+\item Case-insensitive color name matching
+\item Backward compatible with R's color system (R colors prioritized)
+\item Fast lookup using pre-built internal databases
+\item Minimal dependencies (only grDevices)
+\item Comprehensive test coverage
+}
+
+The extended database is stored internally as \code{R/sysdata.rda} and is
+automatically loaded when the package is attached. Users can seamlessly work
+with both R colors and the extended color palette.
 }
 \seealso{
 Useful links:

@@ -2,6 +2,3 @@
 
 export(color_to_hex)
 export(hex_to_color)
-importFrom(grDevices,col2rgb)
-importFrom(grDevices,colors)
-importFrom(grDevices,rgb)
