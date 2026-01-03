@@ -21,12 +21,6 @@ You can install the development version from GitHub:
 devtools::install_github("AnttiRask/col2hex2col")
 ```
 
-Once published to CRAN, you'll be able to install with:
-
-```r
-install.packages("col2hex2col")
-```
-
 ## Usage
 
 ### Convert color names to hex codes
@@ -90,18 +84,11 @@ hex_to_color(hex_codes)
 
 ## Why col2hex2col?
 
-- **No tidyverse dependency**: Unlike some alternatives, this package uses only base R and grDevices
-- **Optimized performance**: Efficient algorithms for fast conversion
-- **CRAN-ready**: Follows all CRAN policies and best practices
+- **Zero dependencies**: Pure base R implementation with no external dependencies
+- **Extensive coverage**: 32,000+ color names vs ~657 in base R
+- **Optimized performance**: Pre-built lookup tables for instant conversion
+- **Backward compatible**: R colors are prioritized, ensuring existing code works
 - **Well-documented**: Complete function documentation and examples
-
-## Comparison with alternatives
-
-The original implementation used tidyverse functions (tibble, pivot_longer, pivot_wider, pmap_chr), which added unnecessary dependencies. **col2hex2col** achieves the same functionality using only base R, making it:
-
-- Lighter (fewer dependencies)
-- Faster (optimized base R functions)
-- More maintainable (simpler code)
 
 ## Code of Conduct
 
