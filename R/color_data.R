@@ -1,0 +1,62 @@
+#' Get Color Database
+#'
+#' Returns the complete color database as a data frame containing all 32,000+
+#' color names and their corresponding hexadecimal codes.
+#'
+#' @return A data frame with two columns:
+#' \describe{
+#'   \item{name}{Character vector of color names (lowercase)}
+#'   \item{hex}{Character vector of hexadecimal color codes (uppercase, format: #RRGGBB)}
+#' }
+#'
+#' The data frame contains 32,462 rows representing all available colors,
+#' including both R's 657 built-in colors and the extended color-names database.
+#'
+#' @details
+#' The returned data frame is sorted alphabetically by color name. Each color
+#' name maps to exactly one hex code, though multiple color names may share
+#' the same hex code.
+#'
+#' This function is useful for:
+#' \itemize{
+#'   \item Exploring available color names
+#'   \item Creating custom color palettes
+#'   \item Searching for colors by name pattern
+#'   \item Analyzing color distributions
+#'   \item Building color visualization tools
+#' }
+#'
+#' @seealso
+#' \code{\link{color_to_hex}} for converting specific color names to hex codes,
+#' \code{\link{hex_to_color}} for the reverse conversion,
+#' \code{\link{create_color_table}} for creating visual color tables
+#'
+#' @export
+#' @examples
+#' # Get the complete color database
+#' colors_df <- get_color_data()
+#' head(colors_df)
+#'
+#' # See dimensions
+#' dim(colors_df)
+#'
+#' # Find all colors containing "blue"
+#' blue_colors <- colors_df[grepl("blue", colors_df$name), ]
+#' head(blue_colors)
+#'
+#' # Get a random sample of colors
+#' set.seed(123)
+#' sample_colors <- colors_df[sample(nrow(colors_df), 10), ]
+#' sample_colors
+get_color_data <- function() {
+  # Create data frame from internal lookup vector
+  df <- data.frame(
+    name = names(colornames_name_to_hex_vector),
+    hex = unname(colornames_name_to_hex_vector),
+    stringsAsFactors = FALSE,
+    row.names = NULL
+  )
+
+  # Sort by name for easier browsing
+  df[order(df$name), ]
+}

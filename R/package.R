@@ -1,10 +1,17 @@
 #' @details
-#' The col2hex2col package provides two main functions for bidirectional conversion
-#' between color names and hexadecimal color codes:
+#' The col2hex2col package provides functions for working with color names and
+#' hexadecimal color codes:
 #'
+#' **Core Conversion Functions:**
 #' \itemize{
 #'   \item \code{\link{color_to_hex}}: Converts color names to hex codes
 #'   \item \code{\link{hex_to_color}}: Converts hex codes to color names
+#' }
+#'
+#' **Data and Visualization Functions:**
+#' \itemize{
+#'   \item \code{\link{get_color_data}}: Export the complete color database as a data frame
+#'   \item \code{\link{create_color_table}}: Create visual color swatch tables (requires gt package)
 #' }
 #'
 #' Both functions are fully vectorized and include comprehensive input validation.

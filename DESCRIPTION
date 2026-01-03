@@ -1,7 +1,7 @@
 Package: col2hex2col
 Type: Package
 Title: Convert Between Color Names and Hex Codes
-Version: 0.2.0
+Version: 0.3.0
 Authors@R: person("Antti", "Rask", email = "anttilennartrask@gmail.com",
                   role = c("aut", "cre"))
 Description: Provides simple functions to convert between color names and
@@ -14,7 +14,8 @@ Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.3.3
 Suggests:
-    testthat (>= 3.0.0)
+    testthat (>= 3.0.0),
+    gt
 Config/testthat/edition: 3
 Depends:
     R (>= 3.5.0)

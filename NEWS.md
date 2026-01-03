@@ -1,3 +1,30 @@
+# col2hex2col 0.3.0
+
+## New Features
+
+* **`get_color_data()`**: New function to export the complete color database as a data frame
+  - Returns all 32,462 color names with their hex codes
+  - Data frame format makes it easy to explore, filter, and analyze colors
+  - Sorted alphabetically by color name
+  - Perfect for creating custom color palettes or searching for specific colors
+
+* **`create_color_table()`**: New function to create visual color swatch tables
+  - Displays colors with names, hex codes, and visual color swatches
+  - Uses the gt package for beautiful formatted tables
+  - Works seamlessly with `get_color_data()` output
+  - Optional dependency - only requires gt if you want to use this feature
+
+## Dependencies
+
+* Added `gt` to Suggests (optional dependency for `create_color_table()`)
+* Package maintains zero hard dependencies - pure base R for core functions
+
+## Testing
+
+* Added 18 new tests for `get_color_data()`
+* Added 8 new tests for `create_color_table()` (with proper handling of optional gt dependency)
+* All 104 tests passing
+
 # col2hex2col 0.2.0
 
 ## Major Features
