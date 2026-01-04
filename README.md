@@ -121,7 +121,8 @@ The `create_color_table()` function creates an interactive table with visual col
 
 ## Acknowledgments
 
-The `create_color_table()` function was inspired by a question from [Nehal Darakhshan](https://github.com/darakhshannehal) on LinkedIn about visualizing color palettes. Thank you!
+- The `create_color_table()` function was inspired by a question from [Nehal Darakhshan](https://github.com/darakhshannehal) on LinkedIn about visualizing color palettes. Thank you!
+- The extended color database (32,000+ colors) comes from [David Aerne's color-names project](https://github.com/meodai/color-names). Thank you for maintaining this excellent resource!
 
 ## Code of Conduct
 
