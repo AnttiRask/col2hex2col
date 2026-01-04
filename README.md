@@ -91,7 +91,6 @@ nrow(blue_colors)
 #> [1] 1517
 
 # Create a beautiful color swatch table (requires gt package)
-library(dplyr)
 create_color_table(head(colors_df, 10))
 ```
 
