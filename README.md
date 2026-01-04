@@ -71,16 +71,46 @@ hex_to_color(hex_codes)
 #> [1] "red"   "blue"  "green"
 ```
 
+### Explore and visualize the color database
+
+```r
+# Get all 32,462 colors as a data frame
+colors_df <- get_color_data()
+head(colors_df)
+#>           name     hex
+#> 1    aaron blue #6FC6E0
+#> 2 abbey purple #73607C
+#> 3   aberdonian #4D6767
+#> 4    aborigine #A99B85
+#> 5    aboukir   #8BA58F
+#> 6    abraxas   #5B6E91
+
+# Find specific colors
+blue_colors <- colors_df[grepl("blue", colors_df$name), ]
+nrow(blue_colors)
+#> [1] 1517
+
+# Create a beautiful color swatch table (requires gt package)
+library(dplyr)
+create_color_table(head(colors_df, 10))
+```
+
+![Color Table Example](color_table_example.png)
+
+The `create_color_table()` function creates an interactive table with visual color swatches, making it easy to explore and select colors for your projects.
+
 ## Features
 
 - **Extensive Database**: 32,000+ color names including all R colors and the color-names database
+- **Data Export**: Access the complete color database as a data frame for exploration and analysis
+- **Visual Tables**: Create beautiful color swatch tables with the optional gt package
 - **Fast**: Pre-built lookup tables for instant color conversion
-- **Simple**: Just two functions to remember
+- **Simple**: Four intuitive functions to remember
 - **Backward Compatible**: R colors are prioritized, ensuring existing code works unchanged
 - **Case Insensitive**: "Red", "red", and "RED" all work the same
 - **Vectorized**: Works with single values or vectors
 - **Validated**: Comprehensive input validation and error messages
-- **Tested**: Extensive test coverage with testthat (67 tests)
+- **Tested**: Extensive test coverage with testthat (104 tests)
 
 ## Why col2hex2col?
 
