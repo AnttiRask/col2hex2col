@@ -91,7 +91,7 @@ nrow(blue_colors)
 #> [1] 1517
 
 # Create a beautiful color swatch table (requires gt package)
-create_color_table(head(colors_df, 10))
+create_color_table(head(colors_df, 9))
 ```
 
 ![Color Table Example](img/color_table_example.png)
