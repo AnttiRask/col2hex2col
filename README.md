@@ -109,7 +109,7 @@ The `create_color_table()` function creates an interactive table with visual col
 - **Case Insensitive**: "Red", "red", and "RED" all work the same
 - **Vectorized**: Works with single values or vectors
 - **Validated**: Comprehensive input validation and error messages
-- **Tested**: Extensive test coverage with testthat (104 tests)
+- **Tested**: Extensive test coverage with testthat (111 tests)
 
 ## Why col2hex2col?
 

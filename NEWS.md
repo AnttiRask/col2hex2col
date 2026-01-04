@@ -1,3 +1,17 @@
+# col2hex2col 0.3.1
+
+## Enhancements
+
+* **`hex_to_color()`**: Now accepts 8-digit hex codes with alpha channel
+  - Automatically strips alpha channel from #RRGGBBAA format codes
+  - Maintains backward compatibility with 6-digit #RRGGBB format
+  - Works seamlessly with paletteer and other packages that output colors with transparency
+
+## Testing
+
+* Added 7 new tests for 8-digit hex code support in `hex_to_color()`
+* All 111 tests passing
+
 # col2hex2col 0.3.0
 
 ## New Features
@@ -14,13 +28,6 @@
   - Works seamlessly with `get_color_data()` output
   - Optional dependency - only requires gt if you want to use this feature
 
-## Enhancements
-
-* **`hex_to_color()`**: Now accepts 8-digit hex codes with alpha channel
-  - Automatically strips alpha channel from #RRGGBBAA format codes
-  - Maintains backward compatibility with 6-digit #RRGGBB format
-  - Works seamlessly with paletteer and other packages that output colors with transparency
-
 ## Dependencies
 
 * Added `gt` to Suggests (optional dependency for `create_color_table()`)
@@ -30,8 +37,7 @@
 
 * Added 18 new tests for `get_color_data()`
 * Added 8 new tests for `create_color_table()` (with proper handling of optional gt dependency)
-* Added 7 new tests for 8-digit hex code support in `hex_to_color()`
-* All 111 tests passing
+* All 104 tests passing
 
 # col2hex2col 0.2.0
 
