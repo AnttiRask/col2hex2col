@@ -105,3 +105,47 @@ test_that("hex_to_color backward compatibility with R colors", {
   result <- hex_to_color(r_hex_codes)
   expect_equal(result, r_names)
 })
+
+test_that("hex_to_color handles 8-digit hex codes with alpha channel", {
+  # Alpha channel should be stripped and color name returned
+  expect_equal(hex_to_color("#FF0000FF"), "red")
+  expect_equal(hex_to_color("#0000FFFF"), "blue")
+  expect_equal(hex_to_color("#00FF00FF"), "green")
+})
+
+test_that("hex_to_color handles 8-digit hex codes with various alpha values", {
+  # Different alpha values should all be stripped
+  expect_equal(hex_to_color("#FF000000"), "red")  # Fully transparent
+  expect_equal(hex_to_color("#FF000080"), "red")  # 50% transparent
+  expect_equal(hex_to_color("#FF0000FF"), "red")  # Fully opaque
+})
+
+test_that("hex_to_color validates 8-digit hex code format", {
+  # Valid 8-digit codes should work
+  expect_no_error(hex_to_color("#FF0000FF"))
+
+  # Invalid formats should still error
+  expect_error(hex_to_color("#FF0000F"), "Invalid hex code format")   # 7 digits
+  expect_error(hex_to_color("#FF0000FFF"), "Invalid hex code format") # 9 digits
+  expect_error(hex_to_color("#FF0000GG"), "Invalid hex code format")  # Invalid chars
+})
+
+test_that("hex_to_color handles mixed 6 and 8 digit codes", {
+  # Should handle both formats in the same vector
+  mixed_codes <- c("#FF0000", "#0000FFFF", "#00FF00", "#FFFF00FF")
+  expected <- c("red", "blue", "green", "yellow")
+  result <- hex_to_color(mixed_codes)
+  expect_equal(result, expected)
+})
+
+test_that("hex_to_color 8-digit codes work with paletteer output", {
+  # Simulate paletteer-style output (8-digit hex with FF alpha)
+  paletteer_style <- c("#FFF5DCFF", "#FCEFD1FF", "#F9E9C6FF")
+  result <- hex_to_color(paletteer_style)
+
+  # Should return character vector (not error)
+  expect_type(result, "character")
+  expect_length(result, 3)
+  # Results may be NA or named colors, but shouldn't error
+  expect_true(all(is.character(result) | is.na(result)))
+})

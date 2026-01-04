@@ -91,9 +91,10 @@ color_to_hex <- function(color) {
 #' prioritizing R's built-in color names when available.
 #'
 #' @param hex A character vector of hexadecimal color codes in the format "#RRGGBB"
-#'   (e.g., "#FF0000", "#0000FF"). The hash symbol (#) is required, and the hex
-#'   code is case-insensitive. Each component (RR, GG, BB) must be a two-digit
-#'   hexadecimal value (00-FF).
+#'   or "#RRGGBBAA" (e.g., "#FF0000", "#0000FF", "#FF0000FF"). The hash symbol (#)
+#'   is required, and the hex code is case-insensitive. Each component (RR, GG, BB)
+#'   must be a two-digit hexadecimal value (00-FF). If an 8-digit code with alpha
+#'   channel (AA) is provided, the alpha channel is ignored.
 #'
 #' @return A character vector of color names (in lowercase). If a hex code does not have a
 #'   corresponding named color in the database, \code{NA} is returned for that element.
@@ -104,11 +105,13 @@ color_to_hex <- function(color) {
 #' \itemize{
 #'   \item The input is not a character vector
 #'   \item Any NA values are present
-#'   \item Any hex codes are not in the correct "#RRGGBB" format
+#'   \item Any hex codes are not in the correct "#RRGGBB" or "#RRGGBBAA" format
 #' }
 #'
 #' This function is case-insensitive for the hex values (e.g., "#FF0000" and
-#' "#ff0000" are treated identically).
+#' "#ff0000" are treated identically). When 8-digit hex codes with alpha channel
+#' are provided (e.g., "#FF0000FF"), the alpha channel is automatically stripped
+#' and only the RGB portion is used for color name lookup.
 #'
 #' **Name Selection Strategy**: When multiple color names map to the same hex code:
 #' \enumerate{
@@ -134,6 +137,9 @@ color_to_hex <- function(color) {
 #' # Convert multiple hex codes
 #' hex_to_color(c("#FF0000", "#0000FF", "#00FF00"))
 #'
+#' # Works with 8-digit hex codes (alpha channel ignored)
+#' hex_to_color(c("#FF0000FF", "#0000FFFF"))
+#'
 #' # Case insensitive
 #' hex_to_color("#ff0000")  # Same as "#FF0000"
 #'
@@ -157,16 +163,20 @@ hex_to_color <- function(hex) {
     stop("NA values are not allowed in hex codes")
   }
 
-  # Validate hex format
-  hex_pattern <- "^#[0-9A-Fa-f]{6}$"
+  # Validate hex format (6 or 8 digits)
+  hex_pattern <- "^#[0-9A-Fa-f]{6}([0-9A-Fa-f]{2})?$"
   if (!all(grepl(hex_pattern, hex))) {
     invalid <- hex[!grepl(hex_pattern, hex)]
-    stop("Invalid hex code format. Expected format: #RRGGBB. Invalid values: ",
+    stop("Invalid hex code format. Expected format: #RRGGBB or #RRGGBBAA. Invalid values: ",
          paste(invalid, collapse = ", "))
   }
 
-  # Standardize hex codes to uppercase
+  # Standardize hex codes to uppercase and strip alpha channel if present
   hex_standardized <- toupper(hex)
+  # If 8 digits (#RRGGBBAA), keep only first 7 characters (#RRGGBB)
+  hex_standardized <- ifelse(nchar(hex_standardized) == 9,
+                              substr(hex_standardized, 1, 7),
+                              hex_standardized)
 
   # Look up color names from internal database
   # (Already prioritizes R colors over extended database)

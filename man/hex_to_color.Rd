@@ -8,9 +8,10 @@ hex_to_color(hex)
 }
 \arguments{
 \item{hex}{A character vector of hexadecimal color codes in the format "#RRGGBB"
-(e.g., "#FF0000", "#0000FF"). The hash symbol (#) is required, and the hex
-code is case-insensitive. Each component (RR, GG, BB) must be a two-digit
-hexadecimal value (00-FF).}
+or "#RRGGBBAA" (e.g., "#FF0000", "#0000FF", "#FF0000FF"). The hash symbol (#)
+is required, and the hex code is case-insensitive. Each component (RR, GG, BB)
+must be a two-digit hexadecimal value (00-FF). If an 8-digit code with alpha
+channel (AA) is provided, the alpha channel is ignored.}
 }
 \value{
 A character vector of color names (in lowercase). If a hex code does not have a
@@ -27,11 +28,13 @@ The function performs input validation and will raise an error if:
 \itemize{
 \item The input is not a character vector
 \item Any NA values are present
-\item Any hex codes are not in the correct "#RRGGBB" format
+\item Any hex codes are not in the correct "#RRGGBB" or "#RRGGBBAA" format
 }
 
 This function is case-insensitive for the hex values (e.g., "#FF0000" and
-"#ff0000" are treated identically).
+"#ff0000" are treated identically). When 8-digit hex codes with alpha channel
+are provided (e.g., "#FF0000FF"), the alpha channel is automatically stripped
+and only the RGB portion is used for color name lookup.
 
 \strong{Name Selection Strategy}: When multiple color names map to the same hex code:
 \enumerate{
@@ -51,6 +54,9 @@ hex_to_color("#FF0000")
 
 # Convert multiple hex codes
 hex_to_color(c("#FF0000", "#0000FF", "#00FF00"))
+
+# Works with 8-digit hex codes (alpha channel ignored)
+hex_to_color(c("#FF0000FF", "#0000FFFF"))
 
 # Case insensitive
 hex_to_color("#ff0000")  # Same as "#FF0000"
