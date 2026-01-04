@@ -1,4 +1,4 @@
-# col2hex2col <img src="hex-col2hex2col.png" align="right" height="139" alt="col2hex2col logo" />
+# col2hex2col <img src="img/hex-col2hex2col.png" align="right" height="139" alt="col2hex2col logo" />
 
 <!-- badges: start -->
 [![R-CMD-check](https://github.com/AnttiRask/col2hex2col/workflows/R-CMD-check/badge.svg)](https://github.com/AnttiRask/col2hex2col/actions)
@@ -95,7 +95,7 @@ library(dplyr)
 create_color_table(head(colors_df, 10))
 ```
 
-![Color Table Example](color_table_example.png)
+![Color Table Example](img/color_table_example.png)
 
 The `create_color_table()` function creates an interactive table with visual color swatches, making it easy to explore and select colors for your projects.
 
