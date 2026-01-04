@@ -119,6 +119,10 @@ The `create_color_table()` function creates an interactive table with visual col
 - **Backward compatible**: R colors are prioritized, ensuring existing code works
 - **Well-documented**: Complete function documentation and examples
 
+## Acknowledgments
+
+The `create_color_table()` function was inspired by a question from [Nehal Darakhshan](https://github.com/darakhshannehal) on LinkedIn about visualizing color palettes. Thank you!
+
 ## Code of Conduct
 
 Please note that this project is released with a [Contributor Code of Conduct](https://contributor-covenant.org/version/2/1/CODE_OF_CONDUCT.html). By contributing to this project, you agree to abide by its terms.
