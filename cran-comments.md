@@ -4,7 +4,11 @@
 
 * This is a new release (first submission to CRAN).
 
-The NOTE about "License stub is invalid DCF" is expected for MIT licenses with a LICENSE file and is acceptable to CRAN.
+## Resubmission
+
+This is a resubmission. In this version I have:
+
+* Fixed the LICENSE file format to use the template format (YEAR/COPYRIGHT HOLDER) instead of the full license text, which resolves the "License stub is invalid DCF" NOTE from the previous submission.
 
 ## Test environments
 
