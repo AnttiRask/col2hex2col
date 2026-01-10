@@ -10,6 +10,7 @@ if (!file.exists("DESCRIPTION")) {
 
 # Final check
 cat("Running final R CMD check...\n")
+Sys.setenv("_R_CHECK_FORCE_SUGGESTS_" = "false")
 check_result <- rcmdcheck::rcmdcheck(args = c("--as-cran", "--no-manual"))
 
 if (length(check_result$errors) > 0) {

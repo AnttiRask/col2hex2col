@@ -1,0 +1,20 @@
+#!/bin/bash
+
+echo "===== col2hex2col CRAN Submission ====="
+echo ""
+echo "Package tarball ready at:"
+echo "  /home/antti/VSCode/col2hex2col_0.3.1.tar.gz"
+echo ""
+echo "To submit to CRAN:"
+echo "1. Open your browser to: https://cran.r-project.org/submit.html"
+echo "2. Fill in the form:"
+echo "   - Name: Antti Rask"
+echo "   - Email: anttilennartrask@gmail.com"
+echo "   - Upload: /home/antti/VSCode/col2hex2col_0.3.1.tar.gz"
+echo ""
+echo "3. In the optional comment field, paste this:"
+echo ""
+cat cran-comments.md
+echo ""
+echo "4. Submit and check your email for confirmation link!"
+echo ""
