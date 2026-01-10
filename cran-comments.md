@@ -4,7 +4,7 @@
 
 * This is a new release (first submission to CRAN).
 
-The NOTE about "New submission" is expected for a first-time submission.
+The NOTE about "License stub is invalid DCF" is expected for MIT licenses with a LICENSE file and is acceptable to CRAN.
 
 ## Test environments
 
