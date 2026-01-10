@@ -16,3 +16,6 @@
 ^CRAN-SUBMISSION$
 ^hex-col2hex2col\.png$
 ^img$
+^cran-comments\.html$
+^submit_to_cran\.sh$
+^upload_winbuilder\.sh$
