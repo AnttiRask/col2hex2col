@@ -1,5 +1,43 @@
-# Convert OKLab to hex and color names
-
+#' Convert OKLab to Hex Codes
+#'
+#' Converts OKLab values (L, a, b) to hexadecimal color codes. An optional alpha
+#' channel can be supplied to generate 8-digit hex codes.
+#'
+#' @param L A numeric vector of OKLab lightness values.
+#' @param a A numeric vector of OKLab a component values.
+#' @param b A numeric vector of OKLab b component values.
+#' @param alpha A numeric vector of alpha values in the range 0-1. If provided and
+#'   not equal to 1, the alpha channel is appended to the hex output as "#RRGGBBAA".
+#'
+#' @return A character vector of hexadecimal color codes in the format "#RRGGBB"
+#'   or "#RRGGBBAA" when alpha is not 1. The returned vector has the same length
+#'   as the input.
+#'
+#' @details
+#' The function performs input validation and will raise an error if:
+#' \itemize{
+#'   \item Any input is not numeric
+#'   \item Any NA values are present
+#'   \item Input lengths are incompatible
+#' }
+#'
+#' Computed RGB values are clipped to the 0-1 range before converting to hex,
+#' which maps out-of-gamut values to the nearest sRGB boundary.
+#'
+#' @references
+#' \url{https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Values/color_value/oklab}
+#'
+#' @seealso
+#' \code{\link{oklab_to_color}} for converting to color names,
+#' \code{\link{hex_to_oklab}} for the reverse conversion
+#'
+#' @export
+#' @examples
+#' # Convert OKLab values for red
+#' oklab_to_hex(0.6279554, 0.2248631, 0.1258463)
+#'
+#' # Convert multiple OKLab values
+#' oklab_to_hex(c(0.62, 0.5), c(0.2, -0.1), c(0.12, 0.05))
 oklab_to_hex <- function(L, a, b, alpha = 1) {
   if (!is.numeric(L) || !is.numeric(a) || !is.numeric(b)) {
     stop("Inputs L, a, and b must be numeric")
@@ -50,6 +88,35 @@ oklab_to_hex <- function(L, a, b, alpha = 1) {
   rgb_hex
 }
 
+#' Convert OKLab to Color Names
+#'
+#' Converts OKLab values to color names using the internal color database. The
+#' conversion first maps OKLab to hex codes and then uses \code{\link{hex_to_color}}
+#' for name lookup.
+#'
+#' @param L A numeric vector of OKLab lightness values.
+#' @param a A numeric vector of OKLab a component values.
+#' @param b A numeric vector of OKLab b component values.
+#' @param alpha A numeric vector of alpha values in the range 0-1. Alpha is used
+#'   only for hex generation and is ignored for name lookup.
+#'
+#' @return A character vector of color names in lowercase. If a color does not
+#'   have a corresponding named entry, \code{NA} is returned for that element.
+#'
+#' @details
+#' This function is vectorized and relies on \code{\link{oklab_to_hex}} followed by
+#' \code{\link{hex_to_color}}. The same validation rules as \code{\link{oklab_to_hex}}
+#' apply.
+#'
+#' @seealso
+#' \code{\link{oklab_to_hex}} for hex output,
+#' \code{\link{color_to_oklab}} for the reverse conversion,
+#' \code{\link{hex_to_color}} for name lookup
+#'
+#' @export
+#' @examples
+#' # Convert OKLab values for red to a color name
+#' oklab_to_color(0.6279554, 0.2248631, 0.1258463)
 oklab_to_color <- function(L, a, b, alpha = 1) {
   hex_codes <- oklab_to_hex(L, a, b, alpha)
   hex_to_color(hex_codes)

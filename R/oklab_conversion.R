@@ -1,6 +1,50 @@
-# Convert color inputs to OKLab
-# Uses the existing color name database (base R + extended) via color_to_hex()
-
+#' Convert Hex Codes to OKLab
+#'
+#' Converts hexadecimal color codes to OKLab values (L, a, b). The output includes
+#' an alpha column derived from 8-digit hex codes when present.
+#'
+#' @param hex A character vector of hexadecimal color codes in the format "#RRGGBB"
+#'   or "#RRGGBBAA" (e.g., "#FF0000", "#0000FF", "#FF0000CC"). The hash symbol (#)
+#'   is required, and the hex code is case-insensitive. If an 8-digit code is provided,
+#'   the alpha channel is parsed into the returned data frame.
+#'
+#' @return A data frame with one row per input value and columns:
+#' \describe{
+#'   \item{L}{OKLab lightness (0-1 for sRGB gamut)}
+#'   \item{a}{OKLab a component}
+#'   \item{b}{OKLab b component}
+#'   \item{alpha}{Alpha (0-1)}
+#' }
+#'
+#' @details
+#' The function performs input validation and will raise an error if:
+#' \itemize{
+#'   \item The input is not a character vector
+#'   \item Any NA values are present
+#'   \item Any hex codes are not in the correct "#RRGGBB" or "#RRGGBBAA" format
+#' }
+#'
+#' This function is vectorized and returns a data frame with the same length as
+#' the input.
+#'
+#' @references
+#' \url{https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Values/color_value/oklab}
+#'
+#' @seealso
+#' \code{\link{color_to_oklab}} for converting color names,
+#' \code{\link{oklab_to_hex}} for the reverse conversion,
+#' \code{\link{color_to_hex}} for color name lookup
+#'
+#' @export
+#' @examples
+#' # Convert a single hex code
+#' hex_to_oklab("#FF0000")
+#'
+#' # Convert multiple hex codes
+#' hex_to_oklab(c("#FF0000", "#00FF00", "#0000FF"))
+#'
+#' # Works with 8-digit hex codes (alpha channel parsed)
+#' hex_to_oklab("#FF000080")
 hex_to_oklab <- function(hex) {
   if (!is.character(hex)) {
     stop("Input must be a character vector of hex codes")
@@ -73,6 +117,48 @@ hex_to_oklab <- function(hex) {
   )
 }
 
+#' Convert Color Names to OKLab
+#'
+#' Converts color names to OKLab values using the internal color database of base R
+#' and extended color names.
+#'
+#' @param color A character vector of color names (e.g., "red", "sky blue", "forest green").
+#'   Color names are case-insensitive and whitespace is trimmed.
+#'
+#' @return A data frame with one row per input value and columns:
+#' \describe{
+#'   \item{L}{OKLab lightness (0-1 for sRGB gamut)}
+#'   \item{a}{OKLab a component}
+#'   \item{b}{OKLab b component}
+#'   \item{alpha}{Alpha (0-1)}
+#' }
+#'
+#' @details
+#' The function performs input validation and will raise an error if:
+#' \itemize{
+#'   \item The input is not a character vector
+#'   \item Any NA values are present
+#'   \item Any invalid color names are provided
+#' }
+#'
+#' This function is vectorized and uses \code{\link{color_to_hex}} followed by
+#' \code{\link{hex_to_oklab}} for conversion.
+#'
+#' @seealso
+#' \code{\link{hex_to_oklab}} for converting hex codes,
+#' \code{\link{oklab_to_color}} for the reverse conversion,
+#' \code{\link{color_to_hex}} for color name lookup
+#'
+#' @export
+#' @examples
+#' # Convert a single color name
+#' color_to_oklab("red")
+#'
+#' # Convert multiple color names
+#' color_to_oklab(c("red", "blue", "green"))
+#'
+#' # Works with extended color names
+#' color_to_oklab(c("sunset orange", "arctic ocean"))
 color_to_oklab <- function(color) {
   if (!is.character(color)) {
     stop("Input must be a character vector of color names")
