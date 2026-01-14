@@ -76,17 +76,35 @@ hex_to_color(hex_codes)
 #### HSL
 
 HSL (Hue, Saturation, Lightness) represents colors in a cylindrical model that is
-intuitive for tweaking hue and lightness by hand. Reference: https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Values/color_value/hsl
+intuitive for tweaking hue and lightness by hand. Reference: [MDN HSL](https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Values/color_value/hsl)
+
+```r
+# Hex -> HSL -> color name
+hex_to_hsl("#87CEEB") |> hsl_to_color()
+#> [1] "skyblue"
+```
 
 #### OKLab
 
 OKLab is a perceptually uniform color space designed for modern displays and
-more consistent visual differences. Reference: https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Values/color_value/oklab
+more consistent visual differences. Reference: [MDN OKLab](https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Values/color_value/oklab)
+
+```r
+# Hex -> OKLab -> color name
+hex_to_oklab("#8A2BE2") |> oklab_to_color()
+#> [1] "blueviolet"
+```
 
 #### OKLCH
 
 OKLCH is the cylindrical form of OKLab, making it easier to reason about hue
-and chroma while keeping perceptual uniformity. Reference: https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Values/color_value/oklch
+and chroma while keeping perceptual uniformity. Reference: [MDN OKLCH](https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Values/color_value/oklch)
+
+```r
+# Hex -> OKLCH -> color name
+hex_to_oklch("#FD5E53") |> oklch_to_color()
+#> [1] "sunset orange"
+```
 
 ### Roundtrip around the (color) world 🎨
 
@@ -96,7 +114,6 @@ hex <- paste0("#", c("ffffff", "000000"))
 
 roundtrip <- hex |>
   hex_to_color() |>
-  rev() |>
   color_to_hex() |>
   hex_to_hsl() |>
   hsl_to_hex() |>
