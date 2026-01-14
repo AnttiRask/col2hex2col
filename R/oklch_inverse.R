@@ -1,5 +1,44 @@
-# Convert OKLCH to hex and color names
-
+#' Convert OKLCH to Hex Codes
+#'
+#' Converts OKLCH values (l, c, h) to hexadecimal color codes. An optional alpha
+#' channel can be supplied to generate 8-digit hex codes.
+#'
+#' @param l A numeric vector of OKLCH lightness values.
+#' @param c A numeric vector of OKLCH chroma values.
+#' @param h A numeric vector of hue values in degrees. Values are normalized to
+#'   the range 0-360.
+#' @param alpha A numeric vector of alpha values in the range 0-1. If provided and
+#'   not equal to 1, the alpha channel is appended to the hex output as "#RRGGBBAA".
+#'
+#' @return A character vector of hexadecimal color codes in the format "#RRGGBB"
+#'   or "#RRGGBBAA" when alpha is not 1. The returned vector has the same length
+#'   as the input.
+#'
+#' @details
+#' The function performs input validation and will raise an error if:
+#' \itemize{
+#'   \item Any input is not numeric
+#'   \item Any NA values are present
+#'   \item Input lengths are incompatible
+#' }
+#'
+#' Computed RGB values are clipped to the 0-1 range before converting to hex,
+#' which maps out-of-gamut values to the nearest sRGB boundary.
+#'
+#' @references
+#' \url{https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Values/color_value/oklch}
+#'
+#' @seealso
+#' \code{\link{oklch_to_color}} for converting to color names,
+#' \code{\link{hex_to_oklch}} for the reverse conversion
+#'
+#' @export
+#' @examples
+#' # Convert OKLCH values for red
+#' oklch_to_hex(0.6279554, 0.2576833, 29.2338812)
+#'
+#' # Convert multiple OKLCH values
+#' oklch_to_hex(c(0.62, 0.5), c(0.2, 0.1), c(30, 120))
 oklch_to_hex <- function(l, c, h, alpha = 1) {
   if (!is.numeric(l) || !is.numeric(c) || !is.numeric(h)) {
     stop("Inputs l, c, and h must be numeric")
@@ -54,6 +93,36 @@ oklch_to_hex <- function(l, c, h, alpha = 1) {
   rgb_hex
 }
 
+#' Convert OKLCH to Color Names
+#'
+#' Converts OKLCH values to color names using the internal color database. The
+#' conversion first maps OKLCH to hex codes and then uses \code{\link{hex_to_color}}
+#' for name lookup.
+#'
+#' @param l A numeric vector of OKLCH lightness values.
+#' @param c A numeric vector of OKLCH chroma values.
+#' @param h A numeric vector of hue values in degrees. Values are normalized to
+#'   the range 0-360.
+#' @param alpha A numeric vector of alpha values in the range 0-1. Alpha is used
+#'   only for hex generation and is ignored for name lookup.
+#'
+#' @return A character vector of color names in lowercase. If a color does not
+#'   have a corresponding named entry, \code{NA} is returned for that element.
+#'
+#' @details
+#' This function is vectorized and relies on \code{\link{oklch_to_hex}} followed by
+#' \code{\link{hex_to_color}}. The same validation rules as \code{\link{oklch_to_hex}}
+#' apply.
+#'
+#' @seealso
+#' \code{\link{oklch_to_hex}} for hex output,
+#' \code{\link{color_to_oklch}} for the reverse conversion,
+#' \code{\link{hex_to_color}} for name lookup
+#'
+#' @export
+#' @examples
+#' # Convert OKLCH values for red to a color name
+#' oklch_to_color(0.6279554, 0.2576833, 29.2338812)
 oklch_to_color <- function(l, c, h, alpha = 1) {
   hex_codes <- oklch_to_hex(l, c, h, alpha)
   hex_to_color(hex_codes)
