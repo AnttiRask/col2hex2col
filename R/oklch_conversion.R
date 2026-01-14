@@ -6,7 +6,7 @@
 #' @param hex A character vector of hexadecimal color codes in the format "#RRGGBB"
 #'   or "#RRGGBBAA" (e.g., "#FF0000", "#0000FF", "#FF0000CC"). The hash symbol (#)
 #'   is required, and the hex code is case-insensitive. If an 8-digit code is provided,
-#'   the alpha channel is parsed into the returned data frame.
+#'   the alpha channel is parsed into the returned result.
 #'
 #' @return If a single value is supplied, a named numeric vector with elements
 #'   \code{c(l, c, h, alpha)}. For multiple values, a data frame with columns
@@ -20,8 +20,9 @@
 #'   \item Any hex codes are not in the correct "#RRGGBB" or "#RRGGBBAA" format
 #' }
 #'
-#' This function is vectorized and returns a data frame with the same length as
-#' the input. Hue is expressed in degrees and normalized to 0-360.
+#' This function is vectorized and returns either a named numeric vector (single
+#' input) or a data frame (multiple inputs). Hue is expressed in degrees and
+#' normalized to 0-360.
 #'
 #' @references
 #' \url{https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Values/color_value/oklch}
