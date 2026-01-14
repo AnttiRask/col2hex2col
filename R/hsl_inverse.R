@@ -1,5 +1,46 @@
-# Convert HSL to hex and color names
-
+#' Convert HSL to Hex Codes
+#'
+#' Converts HSL (Hue, Saturation, Lightness) values to hexadecimal color codes.
+#' An optional alpha channel can be supplied to generate 8-digit hex codes.
+#'
+#' @param h A numeric vector of hue values in degrees. Values are normalized to
+#'   the range 0-360.
+#' @param s A numeric vector of saturation values in the range 0-1.
+#' @param l A numeric vector of lightness values in the range 0-1.
+#' @param alpha A numeric vector of alpha values in the range 0-1. If provided and
+#'   not equal to 1, the alpha channel is appended to the hex output as "#RRGGBBAA".
+#'
+#' @return A character vector of hexadecimal color codes in the format "#RRGGBB"
+#'   or "#RRGGBBAA" when alpha is not 1. The returned vector has the same length
+#'   as the input.
+#'
+#' @details
+#' The function performs input validation and will raise an error if:
+#' \itemize{
+#'   \item Any input is not numeric
+#'   \item Any NA values are present
+#'   \item Saturation, lightness, or alpha are outside the range 0-1
+#'   \item Input lengths are incompatible
+#' }
+#'
+#' This function is vectorized and clamps computed RGB values to the 0-1 range
+#' before converting to hex codes.
+#'
+#' @references
+#' \url{https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Values/color_value/hsl}
+#'
+#' @seealso
+#' \code{\link{hsl_to_color}} for converting to color names,
+#' \code{\link{hex_to_hsl}} for the reverse conversion
+#'
+#' @export
+#' @examples
+#' # Convert HSL values for red
+#' hsl_to_hex(0, 1, 0.5)
+#'
+#' # Convert multiple HSL values
+#' hsl_to_hex(c(0, 120, 240), c(1, 1, 1), c(0.5, 0.5, 0.5))
+hsl_to_hex <- function(h, s, l, alpha = 1) {
 hsl_to_hex <- function(h, s, l, alpha = 1) {
   if (!is.numeric(h) || !is.numeric(s) || !is.numeric(l)) {
     stop("Inputs h, s, and l must be numeric")
@@ -58,6 +99,36 @@ hsl_to_hex <- function(h, s, l, alpha = 1) {
   rgb_hex
 }
 
+#' Convert HSL to Color Names
+#'
+#' Converts HSL (Hue, Saturation, Lightness) values to color names using the
+#' internal color database. The conversion first maps HSL to hex codes and then
+#' uses \code{\link{hex_to_color}} for name lookup.
+#'
+#' @param h A numeric vector of hue values in degrees. Values are normalized to
+#'   the range 0-360.
+#' @param s A numeric vector of saturation values in the range 0-1.
+#' @param l A numeric vector of lightness values in the range 0-1.
+#' @param alpha A numeric vector of alpha values in the range 0-1. Alpha is used
+#'   only for hex generation and is ignored for name lookup.
+#'
+#' @return A character vector of color names in lowercase. If a color does not
+#'   have a corresponding named entry, \code{NA} is returned for that element.
+#'
+#' @details
+#' This function is vectorized and relies on \code{\link{hsl_to_hex}} followed by
+#' \code{\link{hex_to_color}}. The same validation rules as \code{\link{hsl_to_hex}}
+#' apply.
+#'
+#' @seealso
+#' \code{\link{hsl_to_hex}} for hex output,
+#' \code{\link{color_to_hsl}} for the reverse conversion,
+#' \code{\link{hex_to_color}} for name lookup
+#'
+#' @export
+#' @examples
+#' # Convert HSL values for red to a color name
+#' hsl_to_color(0, 1, 0.5)
 hsl_to_color <- function(h, s, l, alpha = 1) {
   hex_codes <- hsl_to_hex(h, s, l, alpha)
   hex_to_color(hex_codes)
