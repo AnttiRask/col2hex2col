@@ -75,8 +75,7 @@ hex_to_color(hex_codes)
 
 #### HSL
 
-HSL (Hue, Saturation, Lightness) represents colors in a cylindrical model that is
-intuitive for tweaking hue and lightness by hand. Reference: [MDN HSL](https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Values/color_value/hsl)
+HSL (Hue, Saturation, Lightness) resembles how humans think about color - how light or dark it is and how colorful it feels. It's like RGB, just more intuitive and suitable for math calculations in CSS. [MDN HSL](https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Values/color_value/hsl)
 
 ```r
 # Hex -> HSL -> color name
@@ -86,8 +85,7 @@ hex_to_hsl("#87CEEB") |> hsl_to_color()
 
 #### OKLab
 
-OKLab is a perceptually uniform color space designed for modern displays and
-more consistent visual differences. Reference: [MDN OKLab](https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Values/color_value/oklab)
+OKLab is a perceptually uniform color space designed for more consistent visual differences. Very popular for gradients and dark theme designs.[MDN OKLab](https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Values/color_value/oklab)
 
 ```r
 # Hex -> OKLab -> color name
@@ -97,8 +95,7 @@ hex_to_oklab("#8A2BE2") |> oklab_to_color()
 
 #### OKLCH
 
-OKLCH is the cylindrical form of OKLab, making it easier to reason about hue
-and chroma while keeping perceptual uniformity. Reference: [MDN OKLCH](https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Values/color_value/oklch)
+OKLCH is similar to OKLab, but more readable. basically the rising star of CSS, and already supported by most browsers. [MDN OKLCH](https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Values/color_value/oklch)
 
 ```r
 # Hex -> OKLCH -> color name
@@ -109,8 +106,8 @@ hex_to_oklch("#FD5E53") |> oklch_to_color()
 ### Roundtrip around the (color) world 🎨
 
 ```r
-# Start from hex codes (without #) and normalize
-hex <- paste0("#", c("ffffff", "000000"))
+# Start from hex codes and take a walk in the world of color space 👩‍🚀
+hex <- c("#ffffff", "#000000")
 
 roundtrip <- hex |>
   hex_to_color() |>
