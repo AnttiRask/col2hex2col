@@ -76,7 +76,7 @@ hex_to_oklch <- function(hex) {
   g <- strtoi(substr(hex_std, 4, 5), 16L) / 255
   b <- strtoi(substr(hex_std, 6, 7), 16L) / 255
 
-  to_linear <- function(x) ifelse(x <= 0.04045, x / 12.92, ((x + 0.055) / 1.055) ^ 2.4)
+  to_linear <- function(x) ifelse(x <= 0.04045, x / 12.92, ((x + 0.055) / 1.055)^2.4)
   r_lin <- to_linear(r)
   g_lin <- to_linear(g)
   b_lin <- to_linear(b)
@@ -104,14 +104,14 @@ hex_to_oklch <- function(hex) {
   )
 
   lms <- m1 %*% rgb_lin
-  lms_cbrt <- lms ^ (1 / 3)
+  lms_cbrt <- lms^(1 / 3)
   lab <- m2 %*% lms_cbrt
 
   L <- lab[1, ]
   a <- lab[2, ]
   b_vals <- lab[3, ]
 
-  c_val <- sqrt(a ^ 2 + b_vals ^ 2)
+  c_val <- sqrt(a^2 + b_vals^2)
   h <- (atan2(b_vals, a) * 180 / pi) %% 360
 
   data.frame(
