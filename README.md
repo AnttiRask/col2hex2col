@@ -71,6 +71,46 @@ hex_to_color(hex_codes)
 #> [1] "red"   "blue"  "green"
 ```
 
+### Color space conversions
+
+#### HSL
+
+HSL (Hue, Saturation, Lightness) represents colors in a cylindrical model that is
+intuitive for tweaking hue and lightness by hand. Reference: https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Values/color_value/hsl
+
+#### OKLab
+
+OKLab is a perceptually uniform color space designed for modern displays and
+more consistent visual differences. Reference: https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Values/color_value/oklab
+
+#### OKLCH
+
+OKLCH is the cylindrical form of OKLab, making it easier to reason about hue
+and chroma while keeping perceptual uniformity. Reference: https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Values/color_value/oklch
+
+### Roundtrip around the (color) world 🎨
+
+```r
+# Start from hex codes (without #) and normalize
+hex <- paste0("#", c("ffffff", "000000"))
+
+roundtrip <- hex |>
+  hex_to_color() |>
+  rev() |>
+  color_to_hex() |>
+  hex_to_hsl() |>
+  hsl_to_hex() |>
+  hex_to_oklch() |>
+  oklch_to_hex() |>
+  hex_to_color() |>
+  color_to_hex() |>
+  hex_to_oklab() |>
+  oklab_to_color()
+
+roundtrip
+#> [1] "black" "white"
+```
+
 ### Explore and visualize the color database
 
 ```r
