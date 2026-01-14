@@ -40,8 +40,28 @@
 #'
 #' # Convert multiple HSL values
 #' hsl_to_hex(c(0, 120, 240), c(1, 1, 1), c(0.5, 0.5, 0.5))
-hsl_to_hex <- function(h, s, l, alpha = 1) {
-hsl_to_hex <- function(h, s, l, alpha = 1) {
+hsl_to_hex <- function(h, s = NULL, l = NULL, alpha = 1) {
+  # Allow passing a data frame, matrix, list, or named vector from hex_to_hsl/color_to_hsl
+  if (is.null(s) && is.null(l)) {
+    if (is.data.frame(h) || is.matrix(h)) {
+      alpha <- if ("alpha" %in% colnames(h)) h[, "alpha"] else alpha
+      l <- h[, "l"]
+      s <- h[, "s"]
+      h <- h[, "h"]
+    } else if (is.list(h) && !is.null(h$h) && !is.null(h$s) && !is.null(h$l)) {
+      alpha <- if (!is.null(h$alpha)) h$alpha else alpha
+      l <- h$l
+      s <- h$s
+      h <- h$h
+    } else if (is.numeric(h) && !is.null(names(h)) &&
+               all(c("h", "s", "l") %in% names(h))) {
+      alpha <- if ("alpha" %in% names(h)) h[["alpha"]] else alpha
+      l <- h[["l"]]
+      s <- h[["s"]]
+      h <- h[["h"]]
+    }
+  }
+
   if (!is.numeric(h) || !is.numeric(s) || !is.numeric(l)) {
     stop("Inputs h, s, and l must be numeric")
   }
@@ -129,7 +149,28 @@ hsl_to_hex <- function(h, s, l, alpha = 1) {
 #' @examples
 #' # Convert HSL values for red to a color name
 #' hsl_to_color(0, 1, 0.5)
-hsl_to_color <- function(h, s, l, alpha = 1) {
+hsl_to_color <- function(h, s = NULL, l = NULL, alpha = 1) {
+  # Allow passing a data frame, matrix, list, or named vector
+  if (is.null(s) && is.null(l)) {
+    if (is.data.frame(h) || is.matrix(h)) {
+      alpha <- if ("alpha" %in% colnames(h)) h[, "alpha"] else alpha
+      l <- h[, "l"]
+      s <- h[, "s"]
+      h <- h[, "h"]
+    } else if (is.list(h) && !is.null(h$h) && !is.null(h$s) && !is.null(h$l)) {
+      alpha <- if (!is.null(h$alpha)) h$alpha else alpha
+      l <- h$l
+      s <- h$s
+      h <- h$h
+    } else if (is.numeric(h) && !is.null(names(h)) &&
+               all(c("h", "s", "l") %in% names(h))) {
+      alpha <- if ("alpha" %in% names(h)) h[["alpha"]] else alpha
+      l <- h[["l"]]
+      s <- h[["s"]]
+      h <- h[["h"]]
+    }
+  }
+
   hex_codes <- hsl_to_hex(h, s, l, alpha)
   hex_to_color(hex_codes)
 }

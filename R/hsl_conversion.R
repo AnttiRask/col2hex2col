@@ -8,13 +8,9 @@
 #'   is required, and the hex code is case-insensitive. If an 8-digit code is provided,
 #'   the alpha channel is parsed into the returned data frame.
 #'
-#' @return A data frame with one row per input value and columns:
-#' \describe{
-#'   \item{h}{Hue in degrees (0-360)}
-#'   \item{s}{Saturation (0-1)}
-#'   \item{l}{Lightness (0-1)}
-#'   \item{alpha}{Alpha (0-1)}
-#' }
+#' @return If a single value is supplied, a named numeric vector with elements
+#'   \code{c(h, s, l, alpha)}. For multiple values, a data frame with columns
+#'   \code{h}, \code{s}, \code{l}, and \code{alpha}.
 #'
 #' @details
 #' The function performs input validation and will raise an error if:
@@ -96,14 +92,18 @@ hex_to_hsl <- function(hex) {
   h <- (hue_base * 60) %% 360
   h[delta == 0] <- 0
 
-  data.frame(
-    h = h,
-    s = s,
-    l = l,
-    alpha = alpha,
-    stringsAsFactors = FALSE,
-    row.names = NULL
-  )
+  if (length(hex_std) == 1) {
+    c(h = h, s = s, l = l, alpha = alpha)
+  } else {
+    data.frame(
+      h = h,
+      s = s,
+      l = l,
+      alpha = alpha,
+      stringsAsFactors = FALSE,
+      row.names = NULL
+    )
+  }
 }
 
 #' Convert Color Names to HSL
@@ -114,13 +114,9 @@ hex_to_hsl <- function(hex) {
 #' @param color A character vector of color names (e.g., "red", "sky blue", "forest green").
 #'   Color names are case-insensitive and whitespace is trimmed.
 #'
-#' @return A data frame with one row per input value and columns:
-#' \describe{
-#'   \item{h}{Hue in degrees (0-360)}
-#'   \item{s}{Saturation (0-1)}
-#'   \item{l}{Lightness (0-1)}
-#'   \item{alpha}{Alpha (0-1)}
-#' }
+#' @return If a single value is supplied, a named numeric vector with elements
+#'   \code{c(h, s, l, alpha)}. For multiple values, a data frame with columns
+#'   \code{h}, \code{s}, \code{l}, and \code{alpha}.
 #'
 #' @details
 #' The function performs input validation and will raise an error if:
