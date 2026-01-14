@@ -39,7 +39,28 @@
 #'
 #' # Convert multiple OKLCH values
 #' oklch_to_hex(c(0.62, 0.5), c(0.2, 0.1), c(30, 120))
-oklch_to_hex <- function(l, c, h, alpha = 1) {
+oklch_to_hex <- function(l, c = NULL, h = NULL, alpha = 1) {
+  # Allow passing a data frame, matrix, list, or named vector from hex_to_oklch/color_to_oklch
+  if (is.null(c) && is.null(h)) {
+    if (is.data.frame(l) || is.matrix(l)) {
+      alpha <- if ("alpha" %in% colnames(l)) l[, "alpha"] else alpha
+      h <- l[, "h"]
+      c <- l[, "c"]
+      l <- l[, "l"]
+    } else if (is.list(l) && !is.null(l$l) && !is.null(l$c) && !is.null(l$h)) {
+      alpha <- if (!is.null(l$alpha)) l$alpha else alpha
+      h <- l$h
+      c <- l$c
+      l <- l$l
+    } else if (is.numeric(l) && !is.null(names(l)) &&
+               all(c("l", "c", "h") %in% names(l))) {
+      alpha <- if ("alpha" %in% names(l)) l[["alpha"]] else alpha
+      h <- l[["h"]]
+      c <- l[["c"]]
+      l <- l[["l"]]
+    }
+  }
+
   if (!is.numeric(l) || !is.numeric(c) || !is.numeric(h)) {
     stop("Inputs l, c, and h must be numeric")
   }
@@ -123,7 +144,28 @@ oklch_to_hex <- function(l, c, h, alpha = 1) {
 #' @examples
 #' # Convert OKLCH values for red to a color name
 #' oklch_to_color(0.6279554, 0.2576833, 29.2338812)
-oklch_to_color <- function(l, c, h, alpha = 1) {
+oklch_to_color <- function(l, c = NULL, h = NULL, alpha = 1) {
+  # Allow passing a data frame, matrix, list, or named vector
+  if (is.null(c) && is.null(h)) {
+    if (is.data.frame(l) || is.matrix(l)) {
+      alpha <- if ("alpha" %in% colnames(l)) l[, "alpha"] else alpha
+      h <- l[, "h"]
+      c <- l[, "c"]
+      l <- l[, "l"]
+    } else if (is.list(l) && !is.null(l$l) && !is.null(l$c) && !is.null(l$h)) {
+      alpha <- if (!is.null(l$alpha)) l$alpha else alpha
+      h <- l$h
+      c <- l$c
+      l <- l$l
+    } else if (is.numeric(l) && !is.null(names(l)) &&
+               all(c("l", "c", "h") %in% names(l))) {
+      alpha <- if ("alpha" %in% names(l)) l[["alpha"]] else alpha
+      h <- l[["h"]]
+      c <- l[["c"]]
+      l <- l[["l"]]
+    }
+  }
+
   hex_codes <- oklch_to_hex(l, c, h, alpha)
   hex_to_color(hex_codes)
 }

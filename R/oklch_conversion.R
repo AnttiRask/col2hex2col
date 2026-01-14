@@ -8,13 +8,9 @@
 #'   is required, and the hex code is case-insensitive. If an 8-digit code is provided,
 #'   the alpha channel is parsed into the returned data frame.
 #'
-#' @return A data frame with one row per input value and columns:
-#' \describe{
-#'   \item{l}{OKLCH lightness (0-1 for sRGB gamut)}
-#'   \item{c}{OKLCH chroma}
-#'   \item{h}{Hue in degrees (0-360)}
-#'   \item{alpha}{Alpha (0-1)}
-#' }
+#' @return If a single value is supplied, a named numeric vector with elements
+#'   \code{c(l, c, h, alpha)}. For multiple values, a data frame with columns
+#'   \code{l}, \code{c}, \code{h}, and \code{alpha}.
 #'
 #' @details
 #' The function performs input validation and will raise an error if:
@@ -114,14 +110,18 @@ hex_to_oklch <- function(hex) {
   c_val <- sqrt(a^2 + b_vals^2)
   h <- (atan2(b_vals, a) * 180 / pi) %% 360
 
-  data.frame(
-    l = L,
-    c = c_val,
-    h = h,
-    alpha = alpha,
-    stringsAsFactors = FALSE,
-    row.names = NULL
-  )
+  if (length(hex_std) == 1) {
+    c(l = L, c = c_val, h = h, alpha = alpha)
+  } else {
+    data.frame(
+      l = L,
+      c = c_val,
+      h = h,
+      alpha = alpha,
+      stringsAsFactors = FALSE,
+      row.names = NULL
+    )
+  }
 }
 
 #' Convert Color Names to OKLCH
@@ -132,13 +132,9 @@ hex_to_oklch <- function(hex) {
 #' @param color A character vector of color names (e.g., "red", "sky blue", "forest green").
 #'   Color names are case-insensitive and whitespace is trimmed.
 #'
-#' @return A data frame with one row per input value and columns:
-#' \describe{
-#'   \item{l}{OKLCH lightness (0-1 for sRGB gamut)}
-#'   \item{c}{OKLCH chroma}
-#'   \item{h}{Hue in degrees (0-360)}
-#'   \item{alpha}{Alpha (0-1)}
-#' }
+#' @return If a single value is supplied, a named numeric vector with elements
+#'   \code{c(l, c, h, alpha)}. For multiple values, a data frame with columns
+#'   \code{l}, \code{c}, \code{h}, and \code{alpha}.
 #'
 #' @details
 #' The function performs input validation and will raise an error if:
