@@ -38,7 +38,28 @@
 #'
 #' # Convert multiple OKLab values
 #' oklab_to_hex(c(0.62, 0.5), c(0.2, -0.1), c(0.12, 0.05))
-oklab_to_hex <- function(L, a, b, alpha = 1) {
+oklab_to_hex <- function(L, a = NULL, b = NULL, alpha = 1) {
+  # Allow passing a data frame, matrix, list, or named vector from hex_to_oklab/color_to_oklab
+  if (is.null(a) && is.null(b)) {
+    if (is.data.frame(L) || is.matrix(L)) {
+      alpha <- if ("alpha" %in% colnames(L)) L[, "alpha"] else alpha
+      b <- L[, "b"]
+      a <- L[, "a"]
+      L <- L[, "L"]
+    } else if (is.list(L) && !is.null(L$L) && !is.null(L$a) && !is.null(L$b)) {
+      alpha <- if (!is.null(L$alpha)) L$alpha else alpha
+      b <- L$b
+      a <- L$a
+      L <- L$L
+    } else if (is.numeric(L) && !is.null(names(L)) &&
+               all(c("L", "a", "b") %in% names(L))) {
+      alpha <- if ("alpha" %in% names(L)) L[["alpha"]] else alpha
+      b <- L[["b"]]
+      a <- L[["a"]]
+      L <- L[["L"]]
+    }
+  }
+
   if (!is.numeric(L) || !is.numeric(a) || !is.numeric(b)) {
     stop("Inputs L, a, and b must be numeric")
   }
@@ -117,7 +138,28 @@ oklab_to_hex <- function(L, a, b, alpha = 1) {
 #' @examples
 #' # Convert OKLab values for red to a color name
 #' oklab_to_color(0.6279554, 0.2248631, 0.1258463)
-oklab_to_color <- function(L, a, b, alpha = 1) {
+oklab_to_color <- function(L, a = NULL, b = NULL, alpha = 1) {
+  # Allow passing a data frame, matrix, list, or named vector
+  if (is.null(a) && is.null(b)) {
+    if (is.data.frame(L) || is.matrix(L)) {
+      alpha <- if ("alpha" %in% colnames(L)) L[, "alpha"] else alpha
+      b <- L[, "b"]
+      a <- L[, "a"]
+      L <- L[, "L"]
+    } else if (is.list(L) && !is.null(L$L) && !is.null(L$a) && !is.null(L$b)) {
+      alpha <- if (!is.null(L$alpha)) L$alpha else alpha
+      b <- L$b
+      a <- L$a
+      L <- L$L
+    } else if (is.numeric(L) && !is.null(names(L)) &&
+               all(c("L", "a", "b") %in% names(L))) {
+      alpha <- if ("alpha" %in% names(L)) L[["alpha"]] else alpha
+      b <- L[["b"]]
+      a <- L[["a"]]
+      L <- L[["L"]]
+    }
+  }
+
   hex_codes <- oklab_to_hex(L, a, b, alpha)
   hex_to_color(hex_codes)
 }

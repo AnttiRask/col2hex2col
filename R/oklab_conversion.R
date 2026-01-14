@@ -8,13 +8,9 @@
 #'   is required, and the hex code is case-insensitive. If an 8-digit code is provided,
 #'   the alpha channel is parsed into the returned data frame.
 #'
-#' @return A data frame with one row per input value and columns:
-#' \describe{
-#'   \item{L}{OKLab lightness (0-1 for sRGB gamut)}
-#'   \item{a}{OKLab a component}
-#'   \item{b}{OKLab b component}
-#'   \item{alpha}{Alpha (0-1)}
-#' }
+#' @return If a single value is supplied, a named numeric vector with elements
+#'   \code{c(L, a, b, alpha)}. For multiple values, a data frame with columns
+#'   \code{L}, \code{a}, \code{b}, and \code{alpha}.
 #'
 #' @details
 #' The function performs input validation and will raise an error if:
@@ -107,14 +103,18 @@ hex_to_oklab <- function(hex) {
   lms_cbrt <- lms ^ (1 / 3)
   lab <- m2 %*% lms_cbrt
 
-  data.frame(
-    L = lab[1, ],
-    a = lab[2, ],
-    b = lab[3, ],
-    alpha = alpha,
-    stringsAsFactors = FALSE,
-    row.names = NULL
-  )
+  if (length(hex_std) == 1) {
+    c(L = lab[1, ], a = lab[2, ], b = lab[3, ], alpha = alpha)
+  } else {
+    data.frame(
+      L = lab[1, ],
+      a = lab[2, ],
+      b = lab[3, ],
+      alpha = alpha,
+      stringsAsFactors = FALSE,
+      row.names = NULL
+    )
+  }
 }
 
 #' Convert Color Names to OKLab
@@ -125,13 +125,9 @@ hex_to_oklab <- function(hex) {
 #' @param color A character vector of color names (e.g., "red", "sky blue", "forest green").
 #'   Color names are case-insensitive and whitespace is trimmed.
 #'
-#' @return A data frame with one row per input value and columns:
-#' \describe{
-#'   \item{L}{OKLab lightness (0-1 for sRGB gamut)}
-#'   \item{a}{OKLab a component}
-#'   \item{b}{OKLab b component}
-#'   \item{alpha}{Alpha (0-1)}
-#' }
+#' @return If a single value is supplied, a named numeric vector with elements
+#'   \code{c(L, a, b, alpha)}. For multiple values, a data frame with columns
+#'   \code{L}, \code{a}, \code{b}, and \code{alpha}.
 #'
 #' @details
 #' The function performs input validation and will raise an error if:
