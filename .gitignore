@@ -47,3 +47,6 @@ po/*~
 
 # RStudio Connect folder
 rsconnect/
+
+# Development notes and analysis (not for version control)
+.dev/PR_ANALYSIS.md
