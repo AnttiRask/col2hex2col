@@ -37,25 +37,27 @@ You can pass the output of \code{\link{get_color_data}} directly to this
 function, or create a custom data frame with your own color selection.
 }
 \examples{
-\dontrun{
 # Create a table with a few colors
 colors_df <- data.frame(
   name = c("red", "blue", "forestgreen"),
   hex = c("#FF0000", "#0000FF", "#228B22")
 )
-create_color_table(colors_df)
 
-# Use with get_color_data() - show first 10 colors
-all_colors <- get_color_data()
-create_color_table(head(all_colors, 10))
+# Only run if gt is available
+if (requireNamespace("gt", quietly = TRUE)) {
+  create_color_table(colors_df)
 
-# Create a table with only specific colors
-blue_colors <- all_colors[grepl("blue", all_colors$name), ]
-create_color_table(head(blue_colors, 20))
+  # Use with get_color_data() - show first 10 colors
+  all_colors <- get_color_data()
+  create_color_table(head(all_colors, 10))
 
-# Minimal example with just hex codes
-hex_only <- data.frame(hex = c("#FF0000", "#00FF00", "#0000FF"))
-create_color_table(hex_only)
+  # Create a table with only specific colors
+  blue_colors <- all_colors[grepl("blue", all_colors$name), ]
+  create_color_table(head(blue_colors, 20))
+
+  # Minimal example with just hex codes
+  hex_only <- data.frame(hex = c("#FF0000", "#00FF00", "#0000FF"))
+  create_color_table(hex_only)
 }
 }
 \seealso{
