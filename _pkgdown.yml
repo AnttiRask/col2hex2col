@@ -17,13 +17,13 @@ reference:
   - title: "Color Conversion"
     desc: "Functions for converting between color formats"
     contents:
-      - col2hex
-      - hex2col
-      - starts_with("get_")
-  - title: "Data"
-    desc: "Built-in color datasets"
+      - color_to_hex
+      - hex_to_color
+  - title: "Color Data"
+    desc: "Access and work with the color database"
     contents:
-      - has_concept("datasets")
+      - get_color_data
+      - create_color_table
 
 authors:
   Antti Rask:
