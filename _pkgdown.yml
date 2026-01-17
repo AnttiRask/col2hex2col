@@ -1,0 +1,30 @@
+url: https://anttirask.github.io/col2hex2col/
+
+template:
+  bootstrap: 5
+  bootswatch: flatly
+
+home:
+  title: col2hex2col
+  description: R package for easily converting between color names and hex codes
+
+navbar:
+  structure:
+    left:  [intro, reference, articles, news]
+    right: [search, github]
+
+reference:
+  - title: "Color Conversion"
+    desc: "Functions for converting between color formats"
+    contents:
+      - col2hex
+      - hex2col
+      - starts_with("get_")
+  - title: "Data"
+    desc: "Built-in color datasets"
+    contents:
+      - has_concept("datasets")
+
+authors:
+  Antti Rask:
+    href: https://anttirask.github.io/
