@@ -1,4 +1,4 @@
-# col2hex2col ![col2hex2col logo](img/hex-col2hex2col.png)
+# col2hex2col
 
 ## Overview
 
