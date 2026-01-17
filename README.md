@@ -1,4 +1,4 @@
-# col2hex2col <img src="img/hex-col2hex2col.png" align="right" height="139" alt="col2hex2col logo" />
+# col2hex2col <img src="man/figures/logo.png" align="right" height="139" alt="col2hex2col logo" />
 
 <!-- badges: start -->
 [![R-CMD-check](https://github.com/AnttiRask/col2hex2col/workflows/R-CMD-check/badge.svg)](https://github.com/AnttiRask/col2hex2col/actions)
