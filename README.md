@@ -3,6 +3,7 @@
 <!-- badges: start -->
 [![R-CMD-check](https://github.com/AnttiRask/col2hex2col/workflows/R-CMD-check/badge.svg)](https://github.com/AnttiRask/col2hex2col/actions)
 [![CRAN status](https://www.r-pkg.org/badges/version/col2hex2col)](https://CRAN.R-project.org/package=col2hex2col)
+[![CRAN downloads](https://cranlogs.r-pkg.org/badges/col2hex2col)](https://CRAN.R-project.org/package=col2hex2col)
 [![Lifecycle: stable](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://lifecycle.r-lib.org/articles/stages.html#stable)
 <!-- badges: end -->
 
@@ -14,7 +15,13 @@ The name is a playful reference to "2 Fast 2 Furious" - because color conversion
 
 ## Installation
 
-You can install the development version from GitHub:
+Install the stable version from CRAN:
+
+```r
+install.packages("col2hex2col")
+```
+
+Or install the development version from GitHub:
 
 ```r
 # install.packages("devtools")
