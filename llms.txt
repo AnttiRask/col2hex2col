@@ -12,7 +12,13 @@ conversion should be both fun and fast!
 
 ## Installation
 
-You can install the development version from GitHub:
+Install the stable version from CRAN:
+
+``` r
+install.packages("col2hex2col")
+```
+
+Or install the development version from GitHub:
 
 ``` r
 # install.packages("devtools")

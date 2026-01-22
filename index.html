@@ -63,8 +63,11 @@
 <div class="section level2">
 <h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
 </h2>
-<p>You can install the development version from GitHub:</p>
+<p>Install the stable version from CRAN:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"col2hex2col"</span><span class="op">)</span></span></code></pre></div>
+<p>Or install the development version from GitHub:</p>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># install.packages("devtools")</span></span>
 <span><span class="fu">devtools</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"AnttiRask/col2hex2col"</span><span class="op">)</span></span></code></pre></div>
 </div>
@@ -74,7 +77,7 @@
 <div class="section level3">
 <h3 id="convert-color-names-to-hex-codes">Convert color names to hex codes<a class="anchor" aria-label="anchor" href="#convert-color-names-to-hex-codes"></a>
 </h3>
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/AnttiRask/col2hex2col" class="external-link">col2hex2col</a></span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Single color</span></span>
@@ -96,7 +99,7 @@
 <div class="section level3">
 <h3 id="convert-hex-codes-to-color-names">Convert hex codes to color names<a class="anchor" aria-label="anchor" href="#convert-hex-codes-to-color-names"></a>
 </h3>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Single hex code</span></span>
 <span><span class="fu"><a href="reference/hex_to_color.html">hex_to_color</a></span><span class="op">(</span><span class="st">"#FF0000"</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] "red"</span></span>
@@ -112,7 +115,7 @@
 <div class="section level3">
 <h3 id="round-trip-conversion">Round-trip conversion<a class="anchor" aria-label="anchor" href="#round-trip-conversion"></a>
 </h3>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Color -&gt; Hex -&gt; Color</span></span>
 <span><span class="va">colors</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"red"</span>, <span class="st">"blue"</span>, <span class="st">"green"</span><span class="op">)</span></span>
 <span><span class="va">hex_codes</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/color_to_hex.html">color_to_hex</a></span><span class="op">(</span><span class="va">colors</span><span class="op">)</span></span>
@@ -122,7 +125,7 @@
 <div class="section level3">
 <h3 id="explore-and-visualize-the-color-database">Explore and visualize the color database<a class="anchor" aria-label="anchor" href="#explore-and-visualize-the-color-database"></a>
 </h3>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Get all 32,462 colors as a data frame</span></span>
 <span><span class="va">colors_df</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/get_color_data.html">get_color_data</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">colors_df</span><span class="op">)</span></span>
@@ -211,6 +214,7 @@
   </main><aside class="col-md-3"><div class="links">
 <h2 data-toc-skip>Links</h2>
 <ul class="list-unstyled">
+<li><a href="https://cloud.r-project.org/package=col2hex2col" class="external-link">View on CRAN</a></li>
 <li><a href="https://github.com/AnttiRask/col2hex2col/" class="external-link">Browse source code</a></li>
 <li><a href="https://github.com/AnttiRask/col2hex2col/issues" class="external-link">Report a bug</a></li>
 </ul>
@@ -246,6 +250,7 @@
 <ul class="list-unstyled">
 <li><a href="https://github.com/AnttiRask/col2hex2col/actions" class="external-link"><img src="https://github.com/AnttiRask/col2hex2col/workflows/R-CMD-check/badge.svg" alt="R-CMD-check"></a></li>
 <li><a href="https://CRAN.R-project.org/package=col2hex2col" class="external-link"><img src="https://www.r-pkg.org/badges/version/col2hex2col" alt="CRAN status"></a></li>
+<li><a href="https://CRAN.R-project.org/package=col2hex2col" class="external-link"><img src="https://cranlogs.r-pkg.org/badges/col2hex2col" alt="CRAN downloads"></a></li>
 <li><a href="https://lifecycle.r-lib.org/articles/stages.html#stable" class="external-link"><img src="https://img.shields.io/badge/lifecycle-stable-brightgreen.svg" alt="Lifecycle: stable"></a></li>
 </ul>
 </div>

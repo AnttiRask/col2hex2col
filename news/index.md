@@ -2,6 +2,8 @@
 
 ## col2hex2col 0.3.1
 
+CRAN release: 2026-01-21
+
 ### Enhancements
 
 - **[`hex_to_color()`](https://anttirask.github.io/col2hex2col/reference/hex_to_color.md)**:
