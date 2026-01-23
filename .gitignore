@@ -51,3 +51,6 @@ rsconnect/
 # Development notes and analysis (not for version control)
 .dev/PR_ANALYSIS.md
 cran-page.md
+
+# Manual test scripts for PR review
+test_*_manual.R
