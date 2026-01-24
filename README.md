@@ -68,6 +68,24 @@ hex_to_color("#ff0000")
 #> [1] "red"
 ```
 
+### Nearest color fallback
+
+When a hex code doesn't have an exact match in the database, `hex_to_color()` automatically finds the nearest named color using LAB color distance. This requires the optional `farver` package.
+
+```r
+# Hex code without exact match - finds nearest named color
+hex_to_color("#ABCDEF")
+#> [1] "alphabet blue"
+#> Warning: Hex value(s) #ABCDEF have no exact match; falling back using lab distance.
+
+# Disable fallback to get NA for unmatched colors
+hex_to_color("#ABCDEF", fallback_nearest_color = FALSE)
+#> [1] NA
+
+# Install farver for fallback support
+install.packages("farver")
+```
+
 ### Round-trip conversion
 
 ```r
@@ -108,19 +126,20 @@ The `create_color_table()` function creates an interactive table with visual col
 ## Features
 
 - **Extensive Database**: 32,000+ color names including all R colors and the color-names database
+- **Nearest Color Fallback**: Automatically finds the closest named color when no exact match exists (requires optional `farver` package)
 - **Data Export**: Access the complete color database as a data frame for exploration and analysis
 - **Visual Tables**: Create beautiful color swatch tables with the optional gt package
 - **Fast**: Pre-built lookup tables for instant color conversion
-- **Simple**: Four intuitive functions to remember
+- **Simple**: Intuitive functions to remember
 - **Backward Compatible**: R colors are prioritized, ensuring existing code works unchanged
 - **Case Insensitive**: "Red", "red", and "RED" all work the same
 - **Vectorized**: Works with single values or vectors
 - **Validated**: Comprehensive input validation and error messages
-- **Tested**: Extensive test coverage with testthat (111 tests)
+- **Tested**: Extensive test coverage with testthat
 
 ## Why col2hex2col?
 
-- **Zero dependencies**: Pure base R implementation with no external dependencies
+- **Minimal dependencies**: Core functionality uses pure base R; optional packages (`farver`, `gt`) enhance features
 - **Extensive coverage**: 32,000+ color names vs ~657 in base R
 - **Optimized performance**: Pre-built lookup tables for instant conversion
 - **Backward compatible**: R colors are prioritized, ensuring existing code works
@@ -130,6 +149,7 @@ The `create_color_table()` function creates an interactive table with visual col
 
 - The `create_color_table()` function was inspired by a question from [Nehal Darakhshan](https://github.com/darakhshannehal) on LinkedIn about visualizing color palettes. Thank you!
 - The extended color database (32,000+ colors) comes from [David Aerne's color-names project](https://github.com/meodai/color-names). Thank you for maintaining this excellent resource!
+- The nearest color fallback functionality was contributed by [iamYannC](https://github.com/iamYannC). Thank you for this great addition!
 
 ## Code of Conduct
 
