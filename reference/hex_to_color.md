@@ -7,7 +7,7 @@ color names, prioritizing R's built-in color names when available.
 ## Usage
 
 ``` r
-hex_to_color(hex)
+hex_to_color(hex, fallback_nearest_color = TRUE, fallback_distance = c("lab"))
 ```
 
 ## Arguments

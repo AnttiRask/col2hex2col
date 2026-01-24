@@ -79,44 +79,44 @@ the same hex code.</p>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># Get the complete color database</span></span></span>
 <span class="r-in"><span><span class="va">colors_df</span> <span class="op">&lt;-</span> <span class="fu">get_color_data</span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">colors_df</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                            name     hex</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 658                     100 mph #C93F38</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 659          18th century green #A59344</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 660              1975 earth red #7B463B</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 661          1989 miami hotline #DD3366</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 662 20000 leagues under the sea #191970</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 663           21st century blue #7FB9DD</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                            name     hex    lab_l     lab_a     lab_b</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 658                     100 mph #C93F38 47.31632 54.067012  35.32651</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 659          18th century green #A59344 61.03262 -3.367873  43.49787</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 660              1975 earth red #7B463B 35.80671 21.453625  16.44115</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 661          1989 miami hotline #DD3366 50.33896 66.911465  12.43714</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 662 20000 leagues under the sea #191970 15.85760 31.715801 -49.57238</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 663           21st century blue #7FB9DD 72.51353 -9.503429 -23.94186</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># See dimensions</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/dim.html" class="external-link">dim</a></span><span class="op">(</span><span class="va">colors_df</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 32462     2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 32462     5</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Find all colors containing "blue"</span></span></span>
 <span class="r-in"><span><span class="va">blue_colors</span> <span class="op">&lt;-</span> <span class="va">colors_df</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/grep.html" class="external-link">grepl</a></span><span class="op">(</span><span class="st">"blue"</span>, <span class="va">colors_df</span><span class="op">$</span><span class="va">name</span><span class="op">)</span>, <span class="op">]</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">blue_colors</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                        name     hex</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 663       21st century blue #7FB9DD</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 673           99 years blue #000099</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 687             a-list blue #A9BFC5</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 728 abyssal anchorfish blue #1B2632</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 729            abyssal blue #00035B</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 738           academic blue #2C3E56</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                        name     hex     lab_l      lab_a      lab_b</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 663       21st century blue #7FB9DD 72.513535 -9.5034285 -23.941860</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 673           99 years blue #000099 16.984608 54.0842393 -73.660652</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 687             a-list blue #A9BFC5 75.901293 -6.2249830  -5.547463</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 728 abyssal anchorfish blue #1B2632 14.676396 -0.9371172  -9.359426</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 729            abyssal blue #00035B  7.408709 35.2808794 -49.730755</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 738           academic blue #2C3E56 25.720365  0.2542979 -16.667031</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Get a random sample of colors</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">123</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">sample_colors</span> <span class="op">&lt;-</span> <span class="va">colors_df</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/sample.html" class="external-link">sample</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html" class="external-link">nrow</a></span><span class="op">(</span><span class="va">colors_df</span><span class="op">)</span>, <span class="fl">10</span><span class="op">)</span>, <span class="op">]</span></span></span>
 <span class="r-in"><span><span class="va">sample_colors</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                    name     hex</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 19035    mountain olive #908456</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 19083         mr. krabs #D04127</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 26864     snug as a bug #BEA998</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 25198         sand dune #E3D2C0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 28911       taupe brown #483C30</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3626  bloody periphylla #AA1144</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2489          bali deep #8A8E93</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 25805    sensual climax #DA3287</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4010        blue zephyr #5B6676</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 29966       turkish sea #194F90</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                    name     hex    lab_l      lab_a      lab_b</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 19035    mountain olive #908456 55.17971 -2.4698731  26.483728</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 19083         mr. krabs #D04127 48.68719 54.9481583  46.300930</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 26864     snug as a bug #BEA998 70.58812  4.8502804  11.558298</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 25198         sand dune #E3D2C0 85.11414  2.9598204  11.047749</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 28911       taupe brown #483C30 26.22448  3.0966957   9.376595</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3626  bloody periphylla #AA1144 36.68162 59.1173938  13.324504</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2489          bali deep #8A8E93 58.84051 -0.4419281  -3.157083</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 25805    sensual climax #DA3287 50.61723 69.2866343  -7.214701</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4010        blue zephyr #5B6676 42.81529 -0.3655800 -10.358054</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 29966       turkish sea #194F90 33.58667  7.4618168 -40.854226</span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
