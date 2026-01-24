@@ -146,7 +146,7 @@ oklab_to_hex <- function(L, a = NULL, b = NULL, alpha = 1) {
 #' @examples
 #' # Convert OKLab values for red to a color name
 #' oklab_to_color(0.6279554, 0.2248631, 0.1258463)
-oklab_to_color <- function(L, a = NULL, b = NULL, alpha = 1) {
+oklab_to_color <- function(L, a = NULL, b = NULL, alpha = 1, ...) {
   # Allow passing a data frame, matrix, list, or named vector
   if (is.null(a) && is.null(b)) {
     if (is.data.frame(L) || is.matrix(L)) {
@@ -169,5 +169,5 @@ oklab_to_color <- function(L, a = NULL, b = NULL, alpha = 1) {
   }
 
   hex_codes <- oklab_to_hex(L, a, b, alpha)
-  hex_to_color(hex_codes)
+  hex_to_color(hex_codes, ...)
 }
