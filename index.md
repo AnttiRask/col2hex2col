@@ -168,8 +168,8 @@ it easy to explore and select colors for your projects.
 - The extended color database (32,000+ colors) comes from [David Aerne’s
   color-names project](https://github.com/meodai/color-names). Thank you
   for maintaining this excellent resource!
-- The nearest color fallback functionality was contributed by
-  [iamYannC](https://github.com/iamYannC). Thank you for this great
+- The nearest color fallback functionality was contributed by [Yann
+  Cohen](https://github.com/iamYannC). Thank you for this great
   addition!
 
 ## Code of Conduct
