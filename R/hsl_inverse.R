@@ -156,7 +156,7 @@ hsl_to_hex <- function(h, s = NULL, l = NULL, alpha = 1) {
 #' @examples
 #' # Convert HSL values for red to a color name
 #' hsl_to_color(0, 1, 0.5)
-hsl_to_color <- function(h, s = NULL, l = NULL, alpha = 1) {
+hsl_to_color <- function(h, s = NULL, l = NULL, alpha = 1, ...) {
   # Allow passing a data frame, matrix, list, or named vector
   if (is.null(s) && is.null(l)) {
     if (is.data.frame(h) || is.matrix(h)) {
@@ -179,5 +179,5 @@ hsl_to_color <- function(h, s = NULL, l = NULL, alpha = 1) {
   }
 
   hex_codes <- hsl_to_hex(h, s, l, alpha)
-  hex_to_color(hex_codes)
+  hex_to_color(hex_codes, ...)
 }
