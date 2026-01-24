@@ -48,13 +48,5 @@ po/*~
 # RStudio Connect folder
 rsconnect/
 
-# Development notes and analysis (not for version control)
-.dev/PR_ANALYSIS.md
-cran-page.md
-
-# Manual test scripts for PR review
-test_*_manual.R
-
-# Update planning documents
-updates-to-the-package-*.md
-improvements-to-the-package-*.md
+# Development folder (notes, test scripts, planning docs)
+.dev/

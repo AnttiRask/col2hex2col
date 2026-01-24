@@ -12,9 +12,3 @@
 ^_pkgdown\.yml$
 ^docs$
 ^pkgdown$
-^PR_DETAILED_ISSUES\.md$
-^PR_REVIEW_CHECKLIST\.md$
-^cran-page\.md$
-^improvements-to-the-package-.*\.md$
-^updates-to-the-package-.*\.md$
-^test_.*_manual\.R$
