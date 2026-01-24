@@ -12,3 +12,5 @@
 ^_pkgdown\.yml$
 ^docs$
 ^pkgdown$
+^PR_DETAILED_ISSUES\.md$
+^PR_REVIEW_CHECKLIST\.md$
