@@ -21,11 +21,26 @@ hex_to_color(hex, fallback_nearest_color = TRUE, fallback_distance = c("lab"))
   If an 8-digit code with alpha channel (AA) is provided, the alpha
   channel is ignored.
 
+- fallback_nearest_color:
+
+  Logical. If `TRUE` (default), when a hex code has no exact match in
+  the database, the function will find the nearest named color using LAB
+  color distance. Requires the `farver` package. If `FALSE`, unmatched
+  hex codes return `NA`.
+
+- fallback_distance:
+
+  Character. The color distance metric to use for fallback matching.
+  Currently only `"lab"` is supported.
+
 ## Value
 
 A character vector of color names (in lowercase). If a hex code does not
-have a corresponding named color in the database, `NA` is returned for
-that element. The returned vector has the same length as the input.
+have a corresponding named color in the database and
+`fallback_nearest_color = FALSE`, `NA` is returned for that element. If
+`fallback_nearest_color = TRUE`, the nearest named color is returned
+instead (with a warning). The returned vector has the same length as the
+input.
 
 ## Details
 

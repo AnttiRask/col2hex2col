@@ -64,3 +64,7 @@ Useful links:
 ## Author
 
 **Maintainer**: Antti Rask <anttilennartrask@gmail.com>
+
+Other contributors:
+
+- iamYannC (iamYannC) \[contributor\]

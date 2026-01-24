@@ -58,11 +58,25 @@ is required, and the hex code is case-insensitive. Each component (RR, GG, BB)
 must be a two-digit hexadecimal value (00-FF). If an 8-digit code with alpha
 channel (AA) is provided, the alpha channel is ignored.</p></dd>
 
+
+<dt id="arg-fallback-nearest-color">fallback_nearest_color<a class="anchor" aria-label="anchor" href="#arg-fallback-nearest-color"></a></dt>
+<dd><p>Logical. If <code>TRUE</code> (default), when a hex code
+has no exact match in the database, the function will find the nearest named
+color using LAB color distance. Requires the <code>farver</code> package. If <code>FALSE</code>,
+unmatched hex codes return <code>NA</code>.</p></dd>
+
+
+<dt id="arg-fallback-distance">fallback_distance<a class="anchor" aria-label="anchor" href="#arg-fallback-distance"></a></dt>
+<dd><p>Character. The color distance metric to use for fallback
+matching. Currently only <code>"lab"</code> is supported.</p></dd>
+
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
     <p>A character vector of color names (in lowercase). If a hex code does not have a
-corresponding named color in the database, <code>NA</code> is returned for that element.
+corresponding named color in the database and <code>fallback_nearest_color = FALSE</code>,
+<code>NA</code> is returned for that element. If <code>fallback_nearest_color = TRUE</code>,
+the nearest named color is returned instead (with a warning).
 The returned vector has the same length as the input.</p>
     </div>
     <div class="section level2">
