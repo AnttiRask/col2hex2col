@@ -6,6 +6,8 @@
 \alias{col2hex2col-package}
 \title{col2hex2col: Convert Between Color Names and Hex Codes}
 \description{
+\if{html}{\figure{logo.png}{options: style='float: right' alt='logo' width='120'}}
+
 Provides simple functions to convert between color names and hexadecimal color codes using an extensive database of over 32,000 colors. Includes all 657 R built-in colors plus the comprehensive color-names database. The package supports bidirectional conversion with backward compatibility, prioritizing R colors when available.
 }
 \details{
