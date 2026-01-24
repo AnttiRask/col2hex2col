@@ -7,10 +7,12 @@
 get_color_data()
 }
 \value{
-A data frame with two columns:
+A data frame with the following columns:
 \describe{
 \item{name}{Character vector of color names (lowercase)}
 \item{hex}{Character vector of hexadecimal color codes (uppercase, format: #RRGGBB)}
+\item{lab_l, lab_a, lab_b}{(Optional) LAB color space coordinates, added when
+the \code{farver} package is available}
 }
 
 The data frame contains 32,462 rows representing all available colors,

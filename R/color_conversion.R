@@ -154,8 +154,11 @@ color_to_hex <- function(color) {
 #' # Works with extended color database
 #' hex_to_color("#FF6347")  # Returns a descriptive color name
 #'
-#' # Returns NA for colors without named equivalents (rare)
-#' hex_to_color("#ABCDEF")
+#' # Fallback to nearest color when no exact match (default behavior)
+#' hex_to_color("#859900")  # Returns nearest named color with a warning
+#'
+#' # Disable fallback to get NA for unmatched colors
+#' hex_to_color("#859900", fallback_nearest_color = FALSE)
 #'
 #' # Round-trip conversion
 #' original <- c("red", "blue", "green")

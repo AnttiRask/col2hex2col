@@ -4,9 +4,9 @@
 #' Requires the \code{gt} package to be installed.
 #'
 #' @param df A data frame with at minimum a column named \code{hex} containing
-#'   hexadecimal color codes. Optionally can include a \code{name} column for
-#'   color names. If \code{name} is not present, only hex codes and swatches
-#'   will be displayed.
+#'   hexadecimal color codes. Any additional columns will be included in the
+#'   table. The first column (if not \code{hex}) will be automatically labeled
+#'   as "Color Name" in the output table, regardless of its original name.
 #'
 #' @return A \code{gt} table object displaying the colors with visual swatches.
 #'   The table will have columns for color names (if provided), hex codes, and
@@ -77,30 +77,29 @@ create_color_table <- function(df) {
     stop("Data frame must contain a 'hex' column", call. = FALSE)
   }
 
-  # Check if name column exists
-  has_name <- "name" %in% names(df)
-
   # Create swatch column
   df$swatch <- df$hex
 
   # Build gt table
   tbl <- gt::gt(df)
 
-  # Set column labels
-  if (has_name) {
-    tbl <- gt::cols_label(
-      tbl,
-      name = "Color Name",
-      hex = "Hex Code",
-      swatch = "Swatch"
-    )
-  } else {
-    tbl <- gt::cols_label(
-      tbl,
-      hex = "Hex Code",
-      swatch = "Swatch"
-    )
+  # Build column labels dynamically
+  col_labels <- list(hex = "Hex Code", swatch = "Swatch")
+
+  # Add LAB column labels if present
+  if ("lab_l" %in% names(df)) col_labels$lab_l <- "Lab L"
+  if ("lab_a" %in% names(df)) col_labels$lab_a <- "Lab a"
+  if ("lab_b" %in% names(df)) col_labels$lab_b <- "Lab b"
+
+  # Auto-rename first column to "Color Name" if it's not hex or a LAB column
+  first_col <- names(df)[1]
+  lab_cols <- c("lab_l", "lab_a", "lab_b")
+  if (first_col != "hex" && !first_col %in% lab_cols) {
+    col_labels[[first_col]] <- "Color Name"
   }
+
+  # Apply column labels
+  tbl <- do.call(gt::cols_label, c(list(tbl), col_labels))
 
   # Apply color to swatch column
   tbl <- gt::data_color(

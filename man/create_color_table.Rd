@@ -8,9 +8,9 @@ create_color_table(df)
 }
 \arguments{
 \item{df}{A data frame with at minimum a column named \code{hex} containing
-hexadecimal color codes. Optionally can include a \code{name} column for
-color names. If \code{name} is not present, only hex codes and swatches
-will be displayed.}
+hexadecimal color codes. Any additional columns will be included in the
+table. The first column (if not \code{hex}) will be automatically labeled
+as "Color Name" in the output table, regardless of its original name.}
 }
 \value{
 A \code{gt} table object displaying the colors with visual swatches.

@@ -54,3 +54,6 @@ cran-page.md
 
 # Manual test scripts for PR review
 test_*_manual.R
+
+# Update planning documents
+updates-to-the-package-*.md

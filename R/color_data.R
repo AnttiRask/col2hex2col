@@ -6,10 +6,12 @@
 #' Returns the complete color database as a data frame containing all 32,000+
 #' color names and their corresponding hexadecimal codes.
 #'
-#' @return A data frame with two columns:
+#' @return A data frame with the following columns:
 #' \describe{
 #'   \item{name}{Character vector of color names (lowercase)}
 #'   \item{hex}{Character vector of hexadecimal color codes (uppercase, format: #RRGGBB)}
+#'   \item{lab_l, lab_a, lab_b}{(Optional) LAB color space coordinates, added when
+#'     the \code{farver} package is available}
 #' }
 #'
 #' The data frame contains 32,462 rows representing all available colors,
@@ -72,6 +74,8 @@ get_color_data <- function() {
   }
 
   # Sort by name for easier browsing
-  .col2hex_cache_env$color_data_cache <- df[order(df$name), ]
+  df <- df[order(df$name), ]
+  row.names(df) <- NULL
+  .col2hex_cache_env$color_data_cache <- df
   .col2hex_cache_env$color_data_cache
 }
