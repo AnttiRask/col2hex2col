@@ -4,7 +4,7 @@
 \alias{hex_to_color}
 \title{Convert Hex Codes to Color Names}
 \usage{
-hex_to_color(hex)
+hex_to_color(hex, fallback_nearest_color = TRUE)
 }
 \arguments{
 \item{hex}{A character vector of hexadecimal color codes in the format "#RRGGBB"
