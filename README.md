@@ -66,6 +66,14 @@ hex_to_color(c("#FF0000", "#0000FF", "#00FF00"))
 # Case insensitive
 hex_to_color("#ff0000")
 #> [1] "red"
+
+# Nearest-color fallback (Lab distance)
+hex_to_color("#ABCDEF")
+#> Warning: Hex value(s) #ABCDEF have no exact match; falling back using lab distance.
+#> [1] "periwinkle"   # example nearest match
+# Turn off fallback if you need NA for unknown colors
+hex_to_color("#ABCDEF", fallback_nearest_color = FALSE)
+#> [1] NA
 ```
 
 ### Round-trip conversion
@@ -76,6 +84,60 @@ colors <- c("red", "blue", "green")
 hex_codes <- color_to_hex(colors)
 hex_to_color(hex_codes)
 #> [1] "red"   "blue"  "green"
+```
+
+### Color space conversions
+
+#### HSL
+
+HSL (Hue, Saturation, Lightness) resembles how humans think about color - how light or dark it is and how colorful it feels. It's like RGB, just more intuitive and suitable for math calculations in CSS. [MDN HSL](https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Values/color_value/hsl)
+
+```r
+# Hex -> HSL -> color name
+hex_to_hsl("#87CEEB") |> hsl_to_color()
+#> [1] "skyblue"
+```
+
+#### OKLab
+
+OKLab is a perceptually uniform color space designed for more consistent visual differences. Very popular for gradients and dark theme designs.[MDN OKLab](https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Values/color_value/oklab)
+
+```r
+# Hex -> OKLab -> color name
+hex_to_oklab("#8A2BE2") |> oklab_to_color()
+#> [1] "blueviolet"
+```
+
+#### OKLCH
+
+OKLCH is similar to OKLab, but more readable. basically the rising star of CSS, and already supported by most browsers. [MDN OKLCH](https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Values/color_value/oklch)
+
+```r
+# Hex -> OKLCH -> color name
+hex_to_oklch("#FD5E53") |> oklch_to_color()
+#> [1] "sunset orange"
+```
+
+### Roundtrip around the (color) world 🎨
+
+```r
+# Start from hex codes and take a walk in the world of color space 👩‍🚀
+hex <- c("#ffffff", "#000000")
+
+roundtrip <- hex |>
+  hex_to_color() |>
+  color_to_hex() |>
+  hex_to_hsl() |>
+  hsl_to_hex() |>
+  hex_to_oklch() |>
+  oklch_to_hex() |>
+  hex_to_color() |>
+  color_to_hex() |>
+  hex_to_oklab() |>
+  oklab_to_color()
+
+roundtrip
+#> [1] "black" "white"
 ```
 
 ### Explore and visualize the color database
@@ -112,6 +174,7 @@ The `create_color_table()` function creates an interactive table with visual col
 - **Visual Tables**: Create beautiful color swatch tables with the optional gt package
 - **Fast**: Pre-built lookup tables for instant color conversion
 - **Simple**: Four intuitive functions to remember
+- **Nearest-color fallback**: Optional Lab-distance fallback (uses `farver`) with clear warnings; disable via `fallback_nearest_color = FALSE`
 - **Backward Compatible**: R colors are prioritized, ensuring existing code works unchanged
 - **Case Insensitive**: "Red", "red", and "RED" all work the same
 - **Vectorized**: Works with single values or vectors
