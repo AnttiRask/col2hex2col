@@ -14,20 +14,6 @@
 #'   or "#RRGGBBAA" when alpha is not 1. The returned vector has the same length
 #'   as the input.
 #'
-#' @details
-#' The function performs input validation and will raise an error if:
-#' \itemize{
-#'   \item Any input is not numeric
-#'   \item Any NA values are present
-#'   \item Input lengths are incompatible
-#' }
-#'
-#' Inputs are recycled following base R rules (length-1 values are expanded and
-#' shorter vectors are recycled); a warning is issued when lengths are not
-#' multiples of each other. Computed RGB values are clipped to the 0-1 range
-#' before converting to hex, which maps out-of-gamut values to the nearest sRGB
-#' boundary.
-#'
 #' @references
 #' \url{https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Values/color_value/oklch}
 #'
@@ -56,7 +42,7 @@ oklch_to_hex <- function(l, c = NULL, h = NULL, alpha = 1) {
       c <- l$c
       l <- l$l
     } else if (is.numeric(l) && !is.null(names(l)) &&
-               all(c("l", "c", "h") %in% names(l))) {
+      all(c("l", "c", "h") %in% names(l))) {
       alpha <- if ("alpha" %in% names(l)) l[["alpha"]] else alpha
       h <- l[["h"]]
       c <- l[["c"]]
@@ -94,9 +80,9 @@ oklch_to_hex <- function(l, c = NULL, h = NULL, alpha = 1) {
   a_vals <- c_vals * cos(h_rad)
   b_vals <- c_vals * sin(h_rad)
 
-  l_ <- (l_vals + 0.3963377774 * a_vals + 0.2158037573 * b_vals) ^ 3
-  m_ <- (l_vals - 0.1055613458 * a_vals - 0.0638541728 * b_vals) ^ 3
-  s_ <- (l_vals - 0.0894841775 * a_vals - 1.2914855480 * b_vals) ^ 3
+  l_ <- (l_vals + 0.3963377774 * a_vals + 0.2158037573 * b_vals)^3
+  m_ <- (l_vals - 0.1055613458 * a_vals - 0.0638541728 * b_vals)^3
+  s_ <- (l_vals - 0.0894841775 * a_vals - 1.2914855480 * b_vals)^3
 
   r_lin <- 4.0767416621 * l_ - 3.3077115913 * m_ + 0.2309699292 * s_
   g_lin <- -1.2684380046 * l_ + 2.6097574011 * m_ - 0.3413193965 * s_
@@ -107,7 +93,7 @@ oklch_to_hex <- function(l, c = NULL, h = NULL, alpha = 1) {
   g_lin <- clamp01(g_lin)
   b_lin <- clamp01(b_lin)
 
-  to_srgb <- function(x) ifelse(x <= 0.0031308, 12.92 * x, 1.055 * (x ^ (1 / 2.4)) - 0.055)
+  to_srgb <- function(x) ifelse(x <= 0.0031308, 12.92 * x, 1.055 * (x^(1 / 2.4)) - 0.055)
   r <- to_srgb(r_lin)
   g <- to_srgb(g_lin)
   b <- to_srgb(b_lin)
@@ -139,9 +125,8 @@ oklch_to_hex <- function(l, c = NULL, h = NULL, alpha = 1) {
 #'   have a corresponding named entry, \code{NA} is returned for that element.
 #'
 #' @details
-#' This function is vectorized and relies on \code{\link{oklch_to_hex}} followed by
-#' \code{\link{hex_to_color}}. The same validation rules as \code{\link{oklch_to_hex}}
-#' apply.
+#' This function relies on \code{\link{oklch_to_hex}} followed by
+#' \code{\link{hex_to_color}}.
 #'
 #' @seealso
 #' \code{\link{oklch_to_hex}} for hex output,
@@ -166,7 +151,7 @@ oklch_to_color <- function(l, c = NULL, h = NULL, alpha = 1, ...) {
       c <- l$c
       l <- l$l
     } else if (is.numeric(l) && !is.null(names(l)) &&
-               all(c("l", "c", "h") %in% names(l))) {
+      all(c("l", "c", "h") %in% names(l))) {
       alpha <- if ("alpha" %in% names(l)) l[["alpha"]] else alpha
       h <- l[["h"]]
       c <- l[["c"]]

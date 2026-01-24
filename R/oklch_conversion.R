@@ -13,14 +13,7 @@
 #'   \code{l}, \code{c}, \code{h}, and \code{alpha}.
 #'
 #' @details
-#' The function performs input validation and will raise an error if:
-#' \itemize{
-#'   \item The input is not a character vector
-#'   \item Any NA values are present
-#'   \item Any hex codes are not in the correct "#RRGGBB" or "#RRGGBBAA" format
-#' }
-#'
-#' This function is vectorized and returns either a named numeric vector (single
+#' This function returns either a named numeric vector (single
 #' input) or a data frame (multiple inputs). Hue is expressed in degrees and
 #' normalized to 0-360. Output values are rounded to 4 decimal places; for
 #' achromatic colors (chroma rounded to 0), hue is set to 0.
@@ -145,14 +138,8 @@ hex_to_oklch <- function(hex) {
 #'   \code{l}, \code{c}, \code{h}, and \code{alpha}.
 #'
 #' @details
-#' The function performs input validation and will raise an error if:
-#' \itemize{
-#'   \item The input is not a character vector
-#'   \item Any NA values are present
-#'   \item Any invalid color names are provided
-#' }
 #'
-#' This function is vectorized and uses \code{\link{color_to_hex}} followed by
+#' This uses \code{\link{color_to_hex}} followed by
 #' \code{\link{hex_to_oklch}} for conversion.
 #'
 #' @seealso
