@@ -152,7 +152,7 @@ oklch_to_hex <- function(l, c = NULL, h = NULL, alpha = 1) {
 #' @examples
 #' # Convert OKLCH values for red to a color name
 #' oklch_to_color(0.6279554, 0.2576833, 29.2338812)
-oklch_to_color <- function(l, c = NULL, h = NULL, alpha = 1) {
+oklch_to_color <- function(l, c = NULL, h = NULL, alpha = 1, ...) {
   # Allow passing a data frame, matrix, list, or named vector
   if (is.null(c) && is.null(h)) {
     if (is.data.frame(l) || is.matrix(l)) {
@@ -175,5 +175,5 @@ oklch_to_color <- function(l, c = NULL, h = NULL, alpha = 1) {
   }
 
   hex_codes <- oklch_to_hex(l, c, h, alpha)
-  hex_to_color(hex_codes)
+  hex_to_color(hex_codes, ...)
 }

@@ -5,7 +5,10 @@ test_that("get_color_data returns a data frame", {
 
 test_that("get_color_data has correct columns", {
   result <- get_color_data()
-  expect_named(result, c("name", "hex"))
+  expect_true(all(c("name", "hex") %in% names(result)))
+  if (requireNamespace("farver", quietly = TRUE)) {
+    expect_true(all(c("lab_l", "lab_a", "lab_b") %in% names(result)))
+  }
   expect_type(result$name, "character")
   expect_type(result$hex, "character")
 })
