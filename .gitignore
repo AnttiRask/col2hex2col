@@ -57,3 +57,4 @@ test_*_manual.R
 
 # Update planning documents
 updates-to-the-package-*.md
+improvements-to-the-package-*.md

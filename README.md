@@ -102,13 +102,15 @@ hex_to_color(hex_codes)
 # Get all 32,462 colors as a data frame
 colors_df <- get_color_data()
 head(colors_df)
-#>         name     hex
-#> 1    100 mph #C93F38
-#> 2 20000 leagues under the sea #1A2732
-#> 3   3am in chinatown #343C46
-#> 4       8 bit #E64358
-#> 5       a dime a dozen #43857D
-#> 6       a hint of yellow #F8F6E9
+#>                          name     hex    lab_l     lab_a     lab_b
+#> 1                     100 mph #C93F38 47.31632 54.067012  35.32651
+#> 2          18th century green #A59344 61.03262 -3.367873  43.49787
+#> 3              1975 earth red #7B463B 35.80671 21.453625  16.44115
+#> 4          1989 miami hotline #DD3366 50.33896 66.911465  12.43714
+#> 5 20000 leagues under the sea #191970 15.85760 31.715801 -49.57238
+#> 6           21st century blue #7FB9DD 72.51353 -9.503429 -23.94186
+
+# Note: LAB columns (lab_l, lab_a, lab_b) are included when the farver package is installed
 
 # Find specific colors
 blue_colors <- colors_df[grepl("blue", colors_df$name), ]
@@ -119,7 +121,7 @@ nrow(blue_colors)
 create_color_table(head(colors_df, 9))
 ```
 
-![Color Table Example](man/figures/color_table_example.png)
+![](man/figures/color_table_example.png)
 
 The `create_color_table()` function creates an interactive table with visual color swatches, making it easy to explore and select colors for your projects.
 
@@ -127,7 +129,7 @@ The `create_color_table()` function creates an interactive table with visual col
 
 - **Extensive Database**: 32,000+ color names including all R colors and the color-names database
 - **Nearest Color Fallback**: Automatically finds the closest named color when no exact match exists (requires optional `farver` package)
-- **Data Export**: Access the complete color database as a data frame for exploration and analysis
+- **Data Export**: Access the complete color database as a data frame with optional LAB color coordinates for exploration and analysis
 - **Visual Tables**: Create beautiful color swatch tables with the optional gt package
 - **Fast**: Pre-built lookup tables for instant color conversion
 - **Simple**: Intuitive functions to remember
