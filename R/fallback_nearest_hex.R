@@ -43,7 +43,7 @@ fallback_nearest_hex <- function(hex, color_table = get_color_data()) {
 
   nearest <- vapply(
     seq_len(nrow(hex_lab)),
-    function(i) {
+    \(i) {
       dl <- ref_lab[, 1] - hex_lab[i, 1]
       da <- ref_lab[, 2] - hex_lab[i, 2]
       db <- ref_lab[, 3] - hex_lab[i, 3]
