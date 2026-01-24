@@ -105,9 +105,14 @@ hex_to_color("#ff0000")  # Same as "#FF0000"
 hex_to_color("#FF6347")  # Returns a descriptive color name
 #> [1] "tomato"
 
-# Returns NA for colors without named equivalents (rare)
-hex_to_color("#ABCDEF")
-#> [1] "alphabet blue"
+# Fallback to nearest color when no exact match (default behavior)
+hex_to_color("#859900")  # Returns nearest named color with a warning
+#> Warning: Hex value(s) #859900 have no exact match; falling back using lab distance.
+#> [1] "bioshock"
+
+# Disable fallback to get NA for unmatched colors
+hex_to_color("#859900", fallback_nearest_color = FALSE)
+#> [1] NA
 
 # Round-trip conversion
 original <- c("red", "blue", "green")

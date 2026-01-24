@@ -9,7 +9,7 @@ Requires the gt package to be installed."><meta property="og:image" content="htt
 
     <a class="navbar-brand me-2" href="../index.html">col2hex2col</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.4.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.5.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -50,9 +50,9 @@ Requires the <code>gt</code> package to be installed.</p>
 
 <dl><dt id="arg-df">df<a class="anchor" aria-label="anchor" href="#arg-df"></a></dt>
 <dd><p>A data frame with at minimum a column named <code>hex</code> containing
-hexadecimal color codes. Optionally can include a <code>name</code> column for
-color names. If <code>name</code> is not present, only hex codes and swatches
-will be displayed.</p></dd>
+hexadecimal color codes. Any additional columns will be included in the
+table. The first column (if not <code>hex</code>) will be automatically labeled
+as "Color Name" in the output table, regardless of its original name.</p></dd>
 
 </dl></div>
     <div class="section level2">

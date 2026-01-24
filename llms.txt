@@ -74,12 +74,12 @@ This requires the optional `farver` package.
 
 ``` r
 # Hex code without exact match - finds nearest named color
-hex_to_color("#ABCDEF")
-#> [1] "alphabet blue"
-#> Warning: Hex value(s) #ABCDEF have no exact match; falling back using lab distance.
+hex_to_color("#859900")
+#> [1] "bioshock"
+#> Warning: Hex value(s) #859900 have no exact match; falling back using lab distance.
 
 # Disable fallback to get NA for unmatched colors
-hex_to_color("#ABCDEF", fallback_nearest_color = FALSE)
+hex_to_color("#859900", fallback_nearest_color = FALSE)
 #> [1] NA
 
 # Install farver for fallback support
@@ -102,24 +102,24 @@ hex_to_color(hex_codes)
 # Get all 32,462 colors as a data frame
 colors_df <- get_color_data()
 head(colors_df)
-#>           name     hex
-#> 1    aaron blue #6FC6E0
-#> 2 abbey purple #73607C
-#> 3   aberdonian #4D6767
-#> 4    aborigine #A99B85
-#> 5    aboukir   #8BA58F
-#> 6    abraxas   #5B6E91
+#>         name     hex
+#> 1    100 mph #C93F38
+#> 2 20000 leagues under the sea #1A2732
+#> 3   3am in chinatown #343C46
+#> 4       8 bit #E64358
+#> 5       a dime a dozen #43857D
+#> 6       a hint of yellow #F8F6E9
 
 # Find specific colors
 blue_colors <- colors_df[grepl("blue", colors_df$name), ]
 nrow(blue_colors)
-#> [1] 1517
+#> [1] 1815
 
 # Create a beautiful color swatch table (requires gt package)
 create_color_table(head(colors_df, 9))
 ```
 
-![Color Table Example](img/color_table_example.png)
+![Color Table Example](reference/figures/color_table_example.png)
 
 Color Table Example
 

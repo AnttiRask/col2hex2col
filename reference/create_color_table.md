@@ -14,9 +14,10 @@ create_color_table(df)
 - df:
 
   A data frame with at minimum a column named `hex` containing
-  hexadecimal color codes. Optionally can include a `name` column for
-  color names. If `name` is not present, only hex codes and swatches
-  will be displayed.
+  hexadecimal color codes. Any additional columns will be included in
+  the table. The first column (if not `hex`) will be automatically
+  labeled as "Color Name" in the output table, regardless of its
+  original name.
 
 ## Value
 
