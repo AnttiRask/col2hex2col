@@ -4,8 +4,7 @@
 
 - **[Antti Rask](https://anttirask.github.io/)**. Author, maintainer.
 
-- **[Yann Cohen](https://github.com/iamYannC)**. Contributor.  
-  iamYannC
+- **[Yann Cohen](https://github.com/iamYannC)**. Contributor.
 
 ## Citation
 
