@@ -22,7 +22,8 @@
 #'
 #' Hue is set to 0 for achromatic colors (where saturation is 0). This function is
 #' vectorized and returns either a named numeric vector (single input) or a data
-#' frame (multiple inputs) with matching length.
+#' frame (multiple inputs) with matching length. Output values are rounded to 4
+#' decimal places; when saturation rounds to 0, hue is set to 0.
 #'
 #' @references
 #' \url{https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Values/color_value/hsl}
@@ -82,25 +83,32 @@ hex_to_hsl <- function(hex) {
   s <- ifelse(delta == 0, 0, delta / (1 - abs(2 * l - 1)))
 
   hue_base <- numeric(length(hex_std))
-  red_is_max <- maxc == r
-  green_is_max <- maxc == g
-  blue_is_max <- maxc == b
+  chromatic <- delta != 0
+  red_is_max <- (maxc == r) & chromatic
+  green_is_max <- (maxc == g) & chromatic
+  blue_is_max <- (maxc == b) & chromatic
 
   hue_base[red_is_max] <- ((g[red_is_max] - b[red_is_max]) / delta[red_is_max]) %% 6
   hue_base[green_is_max] <- ((b[green_is_max] - r[green_is_max]) / delta[green_is_max]) + 2
   hue_base[blue_is_max] <- ((r[blue_is_max] - g[blue_is_max]) / delta[blue_is_max]) + 4
 
   h <- (hue_base * 60) %% 360
-  h[delta == 0] <- 0
+  h[!chromatic] <- 0
+
+  h_out <- round(h, 4)
+  s_out <- round(s, 4)
+  l_out <- round(l, 4)
+  alpha_out <- round(alpha, 4)
+  h_out[s_out == 0] <- 0
 
   if (length(hex_std) == 1) {
-    c(h = h, s = s, l = l, alpha = alpha)
+    c(h = h_out, s = s_out, l = l_out, alpha = alpha_out)
   } else {
     data.frame(
-      h = h,
-      s = s,
-      l = l,
-      alpha = alpha,
+      h = h_out,
+      s = s_out,
+      l = l_out,
+      alpha = alpha_out,
       stringsAsFactors = FALSE,
       row.names = NULL
     )

@@ -23,8 +23,10 @@
 #'   \item Input lengths are incompatible
 #' }
 #'
-#' This function is vectorized and clamps computed RGB values to the 0-1 range
-#' before converting to hex codes.
+#' This function is vectorized and recycles inputs following base R rules
+#' (length-1 values are expanded and shorter vectors are recycled); a warning is
+#' issued when lengths are not multiples of each other. Computed RGB values are
+#' clamped to the 0-1 range before converting to hex codes.
 #'
 #' @references
 #' \url{https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Values/color_value/hsl}
@@ -69,15 +71,20 @@ hsl_to_hex <- function(h, s = NULL, l = NULL, alpha = 1) {
     stop("Alpha must be numeric")
   }
 
-  n <- length(h)
-  if (!(length(s) == n && length(l) == n && (length(alpha) == 1 || length(alpha) == n))) {
-    stop("h, s, l, and alpha must have compatible lengths")
+  lengths <- c(length(h), length(s), length(l), length(alpha))
+  if (any(lengths == 0)) {
+    return(character(0))
   }
 
-  h_vals <- as.numeric(h) %% 360
-  s_vals <- as.numeric(s)
-  l_vals <- as.numeric(l)
-  alpha_vals <- if (length(alpha) == 1) rep(alpha, n) else as.numeric(alpha)
+  n <- max(lengths)
+  if (any(lengths > 0 & (n %% lengths) != 0)) {
+    warning("Input lengths are not multiples of each other and will be recycled.", call. = FALSE)
+  }
+
+  h_vals <- rep_len(as.numeric(h), n) %% 360
+  s_vals <- rep_len(as.numeric(s), n)
+  l_vals <- rep_len(as.numeric(l), n)
+  alpha_vals <- rep_len(as.numeric(alpha), n)
 
   if (any(is.na(h_vals) | is.na(s_vals) | is.na(l_vals) | is.na(alpha_vals))) {
     stop("Inputs cannot contain NA")
