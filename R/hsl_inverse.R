@@ -13,21 +13,6 @@
 #' @return A character vector of hexadecimal color codes in the format "#RRGGBB"
 #'   or "#RRGGBBAA" when alpha is not 1. The returned vector has the same length
 #'   as the input.
-#'
-#' @details
-#' The function performs input validation and will raise an error if:
-#' \itemize{
-#'   \item Any input is not numeric
-#'   \item Any NA values are present
-#'   \item Saturation, lightness, or alpha are outside the range 0-1
-#'   \item Input lengths are incompatible
-#' }
-#'
-#' This function is vectorized and recycles inputs following base R rules
-#' (length-1 values are expanded and shorter vectors are recycled); a warning is
-#' issued when lengths are not multiples of each other. Computed RGB values are
-#' clamped to the 0-1 range before converting to hex codes.
-#'
 #' @references
 #' \url{https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Values/color_value/hsl}
 #'
@@ -56,7 +41,7 @@ hsl_to_hex <- function(h, s = NULL, l = NULL, alpha = 1) {
       s <- h$s
       h <- h$h
     } else if (is.numeric(h) && !is.null(names(h)) &&
-               all(c("h", "s", "l") %in% names(h))) {
+      all(c("h", "s", "l") %in% names(h))) {
       alpha <- if ("alpha" %in% names(h)) h[["alpha"]] else alpha
       l <- h[["l"]]
       s <- h[["s"]]
@@ -102,12 +87,24 @@ hsl_to_hex <- function(h, s = NULL, l = NULL, alpha = 1) {
 
   region <- floor(h_sector) %% 6
 
-  r1[region == 0] <- c_val[region == 0]; g1[region == 0] <- x_val[region == 0]; b1[region == 0] <- 0
-  r1[region == 1] <- x_val[region == 1]; g1[region == 1] <- c_val[region == 1]; b1[region == 1] <- 0
-  r1[region == 2] <- 0; g1[region == 2] <- c_val[region == 2]; b1[region == 2] <- x_val[region == 2]
-  r1[region == 3] <- 0; g1[region == 3] <- x_val[region == 3]; b1[region == 3] <- c_val[region == 3]
-  r1[region == 4] <- x_val[region == 4]; g1[region == 4] <- 0; b1[region == 4] <- c_val[region == 4]
-  r1[region == 5] <- c_val[region == 5]; g1[region == 5] <- 0; b1[region == 5] <- x_val[region == 5]
+  r1[region == 0] <- c_val[region == 0]
+  g1[region == 0] <- x_val[region == 0]
+  b1[region == 0] <- 0
+  r1[region == 1] <- x_val[region == 1]
+  g1[region == 1] <- c_val[region == 1]
+  b1[region == 1] <- 0
+  r1[region == 2] <- 0
+  g1[region == 2] <- c_val[region == 2]
+  b1[region == 2] <- x_val[region == 2]
+  r1[region == 3] <- 0
+  g1[region == 3] <- x_val[region == 3]
+  b1[region == 3] <- c_val[region == 3]
+  r1[region == 4] <- x_val[region == 4]
+  g1[region == 4] <- 0
+  b1[region == 4] <- c_val[region == 4]
+  r1[region == 5] <- c_val[region == 5]
+  g1[region == 5] <- 0
+  b1[region == 5] <- x_val[region == 5]
 
   m <- l_vals - c_val / 2
   r <- r1 + m
@@ -170,7 +167,7 @@ hsl_to_color <- function(h, s = NULL, l = NULL, alpha = 1, ...) {
       s <- h$s
       h <- h$h
     } else if (is.numeric(h) && !is.null(names(h)) &&
-               all(c("h", "s", "l") %in% names(h))) {
+      all(c("h", "s", "l") %in% names(h))) {
       alpha <- if ("alpha" %in% names(h)) h[["alpha"]] else alpha
       l <- h[["l"]]
       s <- h[["s"]]
