@@ -21,8 +21,11 @@
 #'   \item Input lengths are incompatible
 #' }
 #'
-#' Computed RGB values are clipped to the 0-1 range before converting to hex,
-#' which maps out-of-gamut values to the nearest sRGB boundary.
+#' Inputs are recycled following base R rules (length-1 values are expanded and
+#' shorter vectors are recycled); a warning is issued when lengths are not
+#' multiples of each other. Computed RGB values are clipped to the 0-1 range
+#' before converting to hex, which maps out-of-gamut values to the nearest sRGB
+#' boundary.
 #'
 #' @references
 #' \url{https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Values/color_value/oklab}
@@ -67,15 +70,20 @@ oklab_to_hex <- function(L, a = NULL, b = NULL, alpha = 1) {
     stop("Alpha must be numeric")
   }
 
-  n <- length(L)
-  if (!(length(a) == n && length(b) == n && (length(alpha) == 1 || length(alpha) == n))) {
-    stop("L, a, b, and alpha must have compatible lengths")
+  lengths <- c(length(L), length(a), length(b), length(alpha))
+  if (any(lengths == 0)) {
+    return(character(0))
   }
 
-  L_vals <- as.numeric(L)
-  a_vals <- as.numeric(a)
-  b_vals <- as.numeric(b)
-  alpha_vals <- if (length(alpha) == 1) rep(alpha, n) else as.numeric(alpha)
+  n <- max(lengths)
+  if (any(lengths > 0 & (n %% lengths) != 0)) {
+    warning("Input lengths are not multiples of each other and will be recycled.", call. = FALSE)
+  }
+
+  L_vals <- rep_len(as.numeric(L), n)
+  a_vals <- rep_len(as.numeric(a), n)
+  b_vals <- rep_len(as.numeric(b), n)
+  alpha_vals <- rep_len(as.numeric(alpha), n)
 
   if (any(is.na(L_vals) | is.na(a_vals) | is.na(b_vals) | is.na(alpha_vals))) {
     stop("Inputs cannot contain NA")

@@ -21,7 +21,9 @@
 #' }
 #'
 #' This function is vectorized and returns either a named numeric vector (single
-#' input) or a data frame (multiple inputs).
+#' input) or a data frame (multiple inputs). Output values are rounded to 4
+#' decimal places. OKLab is helpful for direct channel manipulation, while OKLCH
+#' is often preferred for intuitive hue adjustments.
 #'
 #' @references
 #' \url{https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Values/color_value/oklab}
@@ -103,14 +105,19 @@ hex_to_oklab <- function(hex) {
   lms_cbrt <- lms ^ (1 / 3)
   lab <- m2 %*% lms_cbrt
 
+  L_out <- round(lab[1, ], 4)
+  a_out <- round(lab[2, ], 4)
+  b_out <- round(lab[3, ], 4)
+  alpha_out <- round(alpha, 4)
+
   if (length(hex_std) == 1) {
-    c(L = lab[1, ], a = lab[2, ], b = lab[3, ], alpha = alpha)
+    c(L = L_out, a = a_out, b = b_out, alpha = alpha_out)
   } else {
     data.frame(
-      L = lab[1, ],
-      a = lab[2, ],
-      b = lab[3, ],
-      alpha = alpha,
+      L = L_out,
+      a = a_out,
+      b = b_out,
+      alpha = alpha_out,
       stringsAsFactors = FALSE,
       row.names = NULL
     )

@@ -181,6 +181,8 @@ hex_to_color <- function(hex) {
   # Look up color names from internal database
   # (Already prioritizes R colors over extended database)
   color_names <- colornames_hex_to_name_vector[hex_standardized]
+  color_names[color_names %in% c("gray100", "gray 100")] <- "white"
+  color_names[color_names %in% c("gray0", "gray 0")] <- "black"
 
   # Return color names (in lowercase, as stored in database)
   unname(color_names)
