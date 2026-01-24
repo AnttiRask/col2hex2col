@@ -58,5 +58,10 @@ Useful links:
 \author{
 \strong{Maintainer}: Antti Rask \email{anttilennartrask@gmail.com}
 
+Other contributors:
+\itemize{
+  \item iamYannC (iamYannC) [contributor]
+}
+
 }
 \keyword{internal}

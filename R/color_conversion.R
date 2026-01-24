@@ -95,9 +95,17 @@ color_to_hex <- function(color) {
 #'   is required, and the hex code is case-insensitive. Each component (RR, GG, BB)
 #'   must be a two-digit hexadecimal value (00-FF). If an 8-digit code with alpha
 #'   channel (AA) is provided, the alpha channel is ignored.
+#' @param fallback_nearest_color Logical. If \code{TRUE} (default), when a hex code
+#'   has no exact match in the database, the function will find the nearest named
+#'   color using LAB color distance. Requires the \code{farver} package. If \code{FALSE},
+#'   unmatched hex codes return \code{NA}.
+#' @param fallback_distance Character. The color distance metric to use for fallback
+#'   matching. Currently only \code{"lab"} is supported.
 #'
 #' @return A character vector of color names (in lowercase). If a hex code does not have a
-#'   corresponding named color in the database, \code{NA} is returned for that element.
+#'   corresponding named color in the database and \code{fallback_nearest_color = FALSE},
+#'   \code{NA} is returned for that element. If \code{fallback_nearest_color = TRUE},
+#'   the nearest named color is returned instead (with a warning).
 #'   The returned vector has the same length as the input.
 #'
 #' @details
