@@ -153,7 +153,7 @@ color_to_hex <- function(color) {
 #' original <- c("red", "blue", "green")
 #' hex_codes <- color_to_hex(original)
 #' hex_to_color(hex_codes)  # Returns original color names
-hex_to_color <- function(hex) {
+hex_to_color <- function(hex, fallback_nearest_color = TRUE, fallback_distance = c("lab")) {
   # Input validation
   if (!is.character(hex)) {
     stop("Input must be a character vector of hex codes")
@@ -181,6 +181,35 @@ hex_to_color <- function(hex) {
   # Look up color names from internal database
   # (Already prioritizes R colors over extended database)
   color_names <- colornames_hex_to_name_vector[hex_standardized]
+
+  # Optional fallback to nearest named color
+  if (fallback_nearest_color && any(is.na(color_names))) {
+    fallback_distance <- match.arg(fallback_distance)
+    warn <- function(msg) {
+      if (requireNamespace("cli", quietly = TRUE)) {
+        cli::cli_warn(msg)
+      } else {
+        warning(msg, call. = FALSE)
+      }
+    }
+
+    if (requireNamespace("farver", quietly = TRUE)) {
+      missing_hex <- hex_standardized[is.na(color_names)]
+      fallback_names <- fallback_nearest_hex(missing_hex, distance = fallback_distance)
+      color_names[is.na(color_names)] <- fallback_names
+      warn(sprintf(
+        "Hex value(s) %s have no exact match; falling back using %s distance.",
+        paste(missing_hex, collapse = ", "),
+        fallback_distance
+      ))
+    } else {
+      warn("Package 'farver' not available; cannot fall back to nearest color. Returning NA for unmatched hex values.")
+    }
+  }
+
+  # Normalize grays to white/black when appropriate
+  color_names[color_names %in% c("gray100", "gray 100")] <- "white"
+  color_names[color_names %in% c("gray0", "gray 0")] <- "black"
 
   # Return color names (in lowercase, as stored in database)
   unname(color_names)

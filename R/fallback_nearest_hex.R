@@ -1,15 +1,8 @@
 # Find the nearest named color for a given hex code using Lab distance
 
-# If this function is accepted, the following should be implemnted:
-  # {fraver} added as a suggestion namespace
-  # color_table should be pre-computed with Lab values - and remove computation from inside the function
-    # Optional: compute other metrices as well (checkout farver for more details, OKLab, ΔE2000..)
-    # Optional: allow fallback to R-specific color names, rather than the full color table
-  # Add optional argument to `hex_to_color`, either named or not (fallback/...). it will be passed to other color-spacing functions, such as hsl, oklab..
-    
+fallback_nearest_hex <- function(hex, color_table = get_color_data(), distance = c("lab")) {
+  distance <- match.arg(distance)
 
-
-fallback_nearest_hex <- function(hex, color_table = get_color_data()) {
   if (!requireNamespace("farver", quietly = TRUE)) {
     stop(
       "Package 'farver' is required for fallback_nearest_hex(). ",
@@ -22,7 +15,6 @@ fallback_nearest_hex <- function(hex, color_table = get_color_data()) {
     stop("hex must be a character vector of hex codes")
   }
 
-  # i mean, ill leave it. but this is kinda verbose...
   if (!is.data.frame(color_table) || !all(c("name", "hex") %in% names(color_table))) {
     stop("color_table must be a data frame with columns 'name' and 'hex'")
   }
@@ -31,25 +23,37 @@ fallback_nearest_hex <- function(hex, color_table = get_color_data()) {
     stop("hex cannot contain NA values")
   }
 
-  # Convert hex codes to Lab
-  hex_lab <- farver::decode_colour(hex, to = "lab")
+  hex_std <- toupper(hex)
+  hex_std <- ifelse(nchar(hex_std) == 9, substr(hex_std, 1, 7), hex_std)
 
-  # Convert reference colors to Lab 
-      # TODO: // THIS SHOULD DEFINETLY BE PRE-COMPUTED in color_table
-  ref_lab <- farver::decode_colour(color_table$hex, to = "lab")
+  # Exact matches first (no warning, keeps fast path)
+  exact_matches <- colornames_hex_to_name_vector[hex_std]
+  needs_fallback <- is.na(exact_matches)
+  if (!any(needs_fallback)) {
+    return(unname(exact_matches))
+  }
+
+  # Ensure Lab columns are present and use them instead of recomputing
+  if (!all(c("lab_l", "lab_a", "lab_b") %in% names(color_table))) {
+    lab <- farver::decode_colour(color_table$hex, to = "lab")
+    colnames(lab) <- c("lab_l", "lab_a", "lab_b")
+    color_table <- cbind(color_table, lab)
+  }
+
+  ref_lab <- as.matrix(color_table[, c("lab_l", "lab_a", "lab_b")])
+  hex_lab <- farver::decode_colour(hex_std[needs_fallback], to = distance)
 
   nearest <- vapply(
     seq_len(nrow(hex_lab)),
     function(i) {
-      distances <- sqrt(
-        (hex_lab[i, 1] - ref_lab[, 1])^2 +
-          (hex_lab[i, 2] - ref_lab[, 2])^2 +
-          (hex_lab[i, 3] - ref_lab[, 3])^2
-      )
-      color_table$name[which.min(distances)]
+      dl <- ref_lab[, 1] - hex_lab[i, 1]
+      da <- ref_lab[, 2] - hex_lab[i, 2]
+      db <- ref_lab[, 3] - hex_lab[i, 3]
+      color_table$name[which.min(dl * dl + da * da + db * db)]
     },
     character(1)
   )
 
-  unname(nearest)
+  exact_matches[needs_fallback] <- nearest
+  unname(exact_matches)
 }
