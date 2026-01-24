@@ -22,7 +22,8 @@
 #'
 #' This function is vectorized and returns either a named numeric vector (single
 #' input) or a data frame (multiple inputs). Hue is expressed in degrees and
-#' normalized to 0-360.
+#' normalized to 0-360. Output values are rounded to 4 decimal places; for
+#' achromatic colors (chroma rounded to 0), hue is set to 0.
 #'
 #' @references
 #' \url{https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Values/color_value/oklch}
@@ -111,14 +112,20 @@ hex_to_oklch <- function(hex) {
   c_val <- sqrt(a^2 + b_vals^2)
   h <- (atan2(b_vals, a) * 180 / pi) %% 360
 
+  l_out <- round(L, 4)
+  c_out <- round(c_val, 4)
+  h_out <- round(h, 4)
+  alpha_out <- round(alpha, 4)
+  h_out[c_out == 0] <- 0
+
   if (length(hex_std) == 1) {
-    c(l = L, c = c_val, h = h, alpha = alpha)
+    c(l = l_out, c = c_out, h = h_out, alpha = alpha_out)
   } else {
     data.frame(
-      l = L,
-      c = c_val,
-      h = h,
-      alpha = alpha,
+      l = l_out,
+      c = c_out,
+      h = h_out,
+      alpha = alpha_out,
       stringsAsFactors = FALSE,
       row.names = NULL
     )
