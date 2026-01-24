@@ -23,7 +23,7 @@
 
     <a class="navbar-brand me-2" href="index.html">col2hex2col</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.5.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.5.1</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -146,13 +146,15 @@
 <code class="sourceCode R"><span><span class="co"># Get all 32,462 colors as a data frame</span></span>
 <span><span class="va">colors_df</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/get_color_data.html">get_color_data</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">colors_df</span><span class="op">)</span></span>
-<span><span class="co">#&gt;         name     hex</span></span>
-<span><span class="co">#&gt; 1    100 mph #C93F38</span></span>
-<span><span class="co">#&gt; 2 20000 leagues under the sea #1A2732</span></span>
-<span><span class="co">#&gt; 3   3am in chinatown #343C46</span></span>
-<span><span class="co">#&gt; 4       8 bit #E64358</span></span>
-<span><span class="co">#&gt; 5       a dime a dozen #43857D</span></span>
-<span><span class="co">#&gt; 6       a hint of yellow #F8F6E9</span></span>
+<span><span class="co">#&gt;                          name     hex    lab_l     lab_a     lab_b</span></span>
+<span><span class="co">#&gt; 1                     100 mph #C93F38 47.31632 54.067012  35.32651</span></span>
+<span><span class="co">#&gt; 2          18th century green #A59344 61.03262 -3.367873  43.49787</span></span>
+<span><span class="co">#&gt; 3              1975 earth red #7B463B 35.80671 21.453625  16.44115</span></span>
+<span><span class="co">#&gt; 4          1989 miami hotline #DD3366 50.33896 66.911465  12.43714</span></span>
+<span><span class="co">#&gt; 5 20000 leagues under the sea #191970 15.85760 31.715801 -49.57238</span></span>
+<span><span class="co">#&gt; 6           21st century blue #7FB9DD 72.51353 -9.503429 -23.94186</span></span>
+<span></span>
+<span><span class="co"># Note: LAB columns (lab_l, lab_a, lab_b) are included when the farver package is installed</span></span>
 <span></span>
 <span><span class="co"># Find specific colors</span></span>
 <span><span class="va">blue_colors</span> <span class="op">&lt;-</span> <span class="va">colors_df</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/grep.html" class="external-link">grepl</a></span><span class="op">(</span><span class="st">"blue"</span>, <span class="va">colors_df</span><span class="op">$</span><span class="va">name</span><span class="op">)</span>, <span class="op">]</span></span>
@@ -161,9 +163,7 @@
 <span></span>
 <span><span class="co"># Create a beautiful color swatch table (requires gt package)</span></span>
 <span><span class="fu"><a href="reference/create_color_table.html">create_color_table</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">colors_df</span>, <span class="fl">9</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<div class="float">
-<img src="reference/figures/color_table_example.png" alt="Color Table Example"><div class="figcaption">Color Table Example</div>
-</div>
+<p><img src="reference/figures/color_table_example.png"></p>
 <p>The <code><a href="reference/create_color_table.html">create_color_table()</a></code> function creates an interactive table with visual color swatches, making it easy to explore and select colors for your projects.</p>
 </div>
 </div>
@@ -176,7 +176,7 @@
 <li>
 <strong>Nearest Color Fallback</strong>: Automatically finds the closest named color when no exact match exists (requires optional <code>farver</code> package)</li>
 <li>
-<strong>Data Export</strong>: Access the complete color database as a data frame for exploration and analysis</li>
+<strong>Data Export</strong>: Access the complete color database as a data frame with optional LAB color coordinates for exploration and analysis</li>
 <li>
 <strong>Visual Tables</strong>: Create beautiful color swatch tables with the optional gt package</li>
 <li>

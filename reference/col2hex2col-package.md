@@ -67,4 +67,4 @@ Useful links:
 
 Other contributors:
 
-- iamYannC (iamYannC) \[contributor\]
+- Yann Cohen (iamYannC) \[contributor\]
