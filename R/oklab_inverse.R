@@ -13,20 +13,6 @@
 #'   or "#RRGGBBAA" when alpha is not 1. The returned vector has the same length
 #'   as the input.
 #'
-#' @details
-#' The function performs input validation and will raise an error if:
-#' \itemize{
-#'   \item Any input is not numeric
-#'   \item Any NA values are present
-#'   \item Input lengths are incompatible
-#' }
-#'
-#' Inputs are recycled following base R rules (length-1 values are expanded and
-#' shorter vectors are recycled); a warning is issued when lengths are not
-#' multiples of each other. Computed RGB values are clipped to the 0-1 range
-#' before converting to hex, which maps out-of-gamut values to the nearest sRGB
-#' boundary.
-#'
 #' @references
 #' \url{https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Values/color_value/oklab}
 #'
@@ -133,9 +119,8 @@ oklab_to_hex <- function(L, a = NULL, b = NULL, alpha = 1) {
 #'   have a corresponding named entry, \code{NA} is returned for that element.
 #'
 #' @details
-#' This function is vectorized and relies on \code{\link{oklab_to_hex}} followed by
-#' \code{\link{hex_to_color}}. The same validation rules as \code{\link{oklab_to_hex}}
-#' apply.
+#' This function relies on \code{\link{oklab_to_hex}} followed by
+#' \code{\link{hex_to_color}}.
 #'
 #' @seealso
 #' \code{\link{oklab_to_hex}} for hex output,

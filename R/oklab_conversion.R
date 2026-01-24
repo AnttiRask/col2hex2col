@@ -13,16 +13,8 @@
 #'   \code{L}, \code{a}, \code{b}, and \code{alpha}.
 #'
 #' @details
-#' The function performs input validation and will raise an error if:
-#' \itemize{
-#'   \item The input is not a character vector
-#'   \item Any NA values are present
-#'   \item Any hex codes are not in the correct "#RRGGBB" or "#RRGGBBAA" format
-#' }
-#'
-#' This function is vectorized and returns either a named numeric vector (single
-#' input) or a data frame (multiple inputs). Output values are rounded to 4
-#' decimal places. OKLab is helpful for direct channel manipulation, while OKLCH
+#' Output values are rounded to 4 decimal places.
+#' OKLab is helpful for direct channel manipulation, while OKLCH
 #' is often preferred for intuitive hue adjustments.
 #'
 #' @references
@@ -137,14 +129,8 @@ hex_to_oklab <- function(hex) {
 #'   \code{L}, \code{a}, \code{b}, and \code{alpha}.
 #'
 #' @details
-#' The function performs input validation and will raise an error if:
-#' \itemize{
-#'   \item The input is not a character vector
-#'   \item Any NA values are present
-#'   \item Any invalid color names are provided
-#' }
-#'
-#' This function is vectorized and uses \code{\link{color_to_hex}} followed by
+#' 
+#' This function uses \code{\link{color_to_hex}} followed by
 #' \code{\link{hex_to_oklab}} for conversion.
 #'
 #' @seealso
