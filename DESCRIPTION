@@ -2,8 +2,12 @@ Package: col2hex2col
 Type: Package
 Title: Convert Between Color Names and Hex Codes
 Version: 0.4.0
-Authors@R: person("Antti", "Rask", email = "anttilennartrask@gmail.com",
-                  role = c("aut", "cre"))
+Authors@R: c(
+    person("Antti", "Rask", email = "anttilennartrask@gmail.com",
+           role = c("aut", "cre")),
+    person("iamYannC", role = "ctb",
+           comment = c(GitHub = "iamYannC"))
+    )
 Description: Provides simple functions to convert between color names and
     hexadecimal color codes using an extensive database of over 32,000 colors.
     Includes all 657 R built-in colors plus the comprehensive color-names database.
