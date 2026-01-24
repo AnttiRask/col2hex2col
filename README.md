@@ -59,6 +59,14 @@ hex_to_color(c("#FF0000", "#0000FF", "#00FF00"))
 # Case insensitive
 hex_to_color("#ff0000")
 #> [1] "red"
+
+# Nearest-color fallback (Lab distance)
+hex_to_color("#ABCDEF")
+#> Warning: Hex value(s) #ABCDEF have no exact match; falling back using lab distance.
+#> [1] "periwinkle"   # example nearest match
+# Turn off fallback if you need NA for unknown colors
+hex_to_color("#ABCDEF", fallback_nearest_color = FALSE)
+#> [1] NA
 ```
 
 ### Round-trip conversion
@@ -159,6 +167,7 @@ The `create_color_table()` function creates an interactive table with visual col
 - **Visual Tables**: Create beautiful color swatch tables with the optional gt package
 - **Fast**: Pre-built lookup tables for instant color conversion
 - **Simple**: Four intuitive functions to remember
+- **Nearest-color fallback**: Optional Lab-distance fallback (uses `farver`) with clear warnings; disable via `fallback_nearest_color = FALSE`
 - **Backward Compatible**: R colors are prioritized, ensuring existing code works unchanged
 - **Case Insensitive**: "Red", "red", and "RED" all work the same
 - **Vectorized**: Works with single values or vectors
