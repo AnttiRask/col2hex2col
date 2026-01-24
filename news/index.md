@@ -1,5 +1,59 @@
 # Changelog
 
+## col2hex2col 0.5.1
+
+### Documentation
+
+- Updated README examples to show LAB columns in
+  [`get_color_data()`](https://anttirask.github.io/col2hex2col/reference/get_color_data.md)
+  output
+- Added note about LAB columns requiring the `farver` package
+- Updated contributor information in pkgdown configuration
+- Cleaned up repository structure (moved dev files to `.dev/` folder)
+
+## col2hex2col 0.5.0
+
+### Enhancements
+
+- **[`create_color_table()`](https://anttirask.github.io/col2hex2col/reference/create_color_table.md)**:
+  Enhanced column labeling
+  - LAB columns now display as “Lab L”, “Lab a”, “Lab b” instead of raw
+    column names
+  - First column is automatically labeled “Color Name” regardless of
+    input column name
+
+### Bug Fixes
+
+- Fixed
+  [`hex_to_color()`](https://anttirask.github.io/col2hex2col/reference/hex_to_color.md)
+  examples to use hex codes without exact matches
+- Fixed
+  [`get_color_data()`](https://anttirask.github.io/col2hex2col/reference/get_color_data.md)
+  row numbering after alphabetical sorting
+
+### Documentation
+
+- Updated documentation examples with correct output
+
+## col2hex2col 0.4.0
+
+### New Features
+
+- **[`hex_to_color()`](https://anttirask.github.io/col2hex2col/reference/hex_to_color.md)**:
+  Added nearest color fallback functionality
+  - When no exact match exists, returns the closest named color using
+    LAB color distance
+  - Requires optional `farver` package for color distance calculations
+  - New `fallback_nearest_color` parameter (default: `TRUE`) to
+    enable/disable fallback
+  - New `fallback_distance` parameter to get the LAB distance to the
+    matched color
+
+### Contributors
+
+- Added Yann Cohen ([@iamYannC](https://github.com/iamYannC)) as
+  contributor for the fallback functionality
+
 ## col2hex2col 0.3.1
 
 CRAN release: 2026-01-21

@@ -32,6 +32,53 @@
     </div>
 
     <div class="section level2">
+<h2 class="pkg-version" data-toc-text="0.5.1" id="col2hex2col-051">col2hex2col 0.5.1<a class="anchor" aria-label="anchor" href="#col2hex2col-051"></a></h2>
+<div class="section level3">
+<h3 id="documentation-0-5-1">Documentation<a class="anchor" aria-label="anchor" href="#documentation-0-5-1"></a></h3>
+<ul><li>Updated README examples to show LAB columns in <code><a href="../reference/get_color_data.html">get_color_data()</a></code> output</li>
+<li>Added note about LAB columns requiring the <code>farver</code> package</li>
+<li>Updated contributor information in pkgdown configuration</li>
+<li>Cleaned up repository structure (moved dev files to <code>.dev/</code> folder)</li>
+</ul></div>
+</div>
+    <div class="section level2">
+<h2 class="pkg-version" data-toc-text="0.5.0" id="col2hex2col-050">col2hex2col 0.5.0<a class="anchor" aria-label="anchor" href="#col2hex2col-050"></a></h2>
+<div class="section level3">
+<h3 id="enhancements-0-5-0">Enhancements<a class="anchor" aria-label="anchor" href="#enhancements-0-5-0"></a></h3>
+<ul><li>
+<strong><code><a href="../reference/create_color_table.html">create_color_table()</a></code></strong>: Enhanced column labeling
+<ul><li>LAB columns now display as “Lab L”, “Lab a”, “Lab b” instead of raw column names</li>
+<li>First column is automatically labeled “Color Name” regardless of input column name</li>
+</ul></li>
+</ul></div>
+<div class="section level3">
+<h3 id="bug-fixes-0-5-0">Bug Fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-0-5-0"></a></h3>
+<ul><li>Fixed <code><a href="../reference/hex_to_color.html">hex_to_color()</a></code> examples to use hex codes without exact matches</li>
+<li>Fixed <code><a href="../reference/get_color_data.html">get_color_data()</a></code> row numbering after alphabetical sorting</li>
+</ul></div>
+<div class="section level3">
+<h3 id="documentation-0-5-0">Documentation<a class="anchor" aria-label="anchor" href="#documentation-0-5-0"></a></h3>
+<ul><li>Updated documentation examples with correct output</li>
+</ul></div>
+</div>
+    <div class="section level2">
+<h2 class="pkg-version" data-toc-text="0.4.0" id="col2hex2col-040">col2hex2col 0.4.0<a class="anchor" aria-label="anchor" href="#col2hex2col-040"></a></h2>
+<div class="section level3">
+<h3 id="new-features-0-4-0">New Features<a class="anchor" aria-label="anchor" href="#new-features-0-4-0"></a></h3>
+<ul><li>
+<strong><code><a href="../reference/hex_to_color.html">hex_to_color()</a></code></strong>: Added nearest color fallback functionality
+<ul><li>When no exact match exists, returns the closest named color using LAB color distance</li>
+<li>Requires optional <code>farver</code> package for color distance calculations</li>
+<li>New <code>fallback_nearest_color</code> parameter (default: <code>TRUE</code>) to enable/disable fallback</li>
+<li>New <code>fallback_distance</code> parameter to get the LAB distance to the matched color</li>
+</ul></li>
+</ul></div>
+<div class="section level3">
+<h3 id="contributors-0-4-0">Contributors<a class="anchor" aria-label="anchor" href="#contributors-0-4-0"></a></h3>
+<ul><li>Added Yann Cohen (<a href="https://github.com/iamYannC" class="external-link">@iamYannC</a>) as contributor for the fallback functionality</li>
+</ul></div>
+</div>
+    <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.3.1" id="col2hex2col-031">col2hex2col 0.3.1<a class="anchor" aria-label="anchor" href="#col2hex2col-031"></a></h2><p class="text-muted">CRAN release: 2026-01-21</p>
 <div class="section level3">
 <h3 id="enhancements-0-3-1">Enhancements<a class="anchor" aria-label="anchor" href="#enhancements-0-3-1"></a></h3>
