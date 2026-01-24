@@ -1,0 +1,167 @@
+#' Convert Hex Codes to OKLCH
+#'
+#' Converts hexadecimal color codes to OKLCH values (l, c, h). The output includes
+#' an alpha column derived from 8-digit hex codes when present.
+#'
+#' @param hex A character vector of hexadecimal color codes in the format "#RRGGBB"
+#'   or "#RRGGBBAA" (e.g., "#FF0000", "#0000FF", "#FF0000CC"). The hash symbol (#)
+#'   is required, and the hex code is case-insensitive. If an 8-digit code is provided,
+#'   the alpha channel is parsed into the returned result.
+#'
+#' @return If a single value is supplied, a named numeric vector with elements
+#'   \code{c(l, c, h, alpha)}. For multiple values, a data frame with columns
+#'   \code{l}, \code{c}, \code{h}, and \code{alpha}.
+#'
+#' @details
+#' This function returns either a named numeric vector (single
+#' input) or a data frame (multiple inputs). Hue is expressed in degrees and
+#' normalized to 0-360. Output values are rounded to 4 decimal places; for
+#' achromatic colors (chroma rounded to 0), hue is set to 0.
+#'
+#' @references
+#' \url{https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Values/color_value/oklch}
+#'
+#' @seealso
+#' \code{\link{color_to_oklch}} for converting color names,
+#' \code{\link{oklch_to_hex}} for the reverse conversion,
+#' \code{\link{color_to_hex}} for color name lookup
+#'
+#' @export
+#' @examples
+#' # Convert a single hex code
+#' hex_to_oklch("#FF0000")
+#'
+#' # Convert multiple hex codes
+#' hex_to_oklch(c("#FF0000", "#00FF00", "#0000FF"))
+#'
+#' # Works with 8-digit hex codes (alpha channel parsed)
+#' hex_to_oklch("#FF000080")
+hex_to_oklch <- function(hex) {
+  if (!is.character(hex)) {
+    stop("Input must be a character vector of hex codes")
+  }
+
+  if (any(is.na(hex))) {
+    stop("NA values are not allowed in hex codes")
+  }
+
+  hex_pattern <- "^#[0-9A-Fa-f]{6}([0-9A-Fa-f]{2})?$"
+  if (!all(grepl(hex_pattern, hex))) {
+    invalid <- hex[!grepl(hex_pattern, hex)]
+    stop(
+      "Invalid hex code format. Expected format: #RRGGBB or #RRGGBBAA. Invalid values: ",
+      paste(invalid, collapse = ", ")
+    )
+  }
+
+  hex_std <- toupper(hex)
+  alpha <- rep(1, length(hex_std))
+
+  is8 <- nchar(hex_std) == 9
+  if (any(is8)) {
+    alpha[is8] <- strtoi(substr(hex_std[is8], 8, 9), 16L) / 255
+    hex_std[is8] <- substr(hex_std[is8], 1, 7)
+  }
+
+  r <- strtoi(substr(hex_std, 2, 3), 16L) / 255
+  g <- strtoi(substr(hex_std, 4, 5), 16L) / 255
+  b <- strtoi(substr(hex_std, 6, 7), 16L) / 255
+
+  to_linear <- function(x) ifelse(x <= 0.04045, x / 12.92, ((x + 0.055) / 1.055)^2.4)
+  r_lin <- to_linear(r)
+  g_lin <- to_linear(g)
+  b_lin <- to_linear(b)
+
+  rgb_lin <- rbind(r_lin, g_lin, b_lin)
+
+  m1 <- matrix(
+    c(
+      0.4122214708, 0.5363325363, 0.0514459929,
+      0.2119034982, 0.6806995451, 0.1073969566,
+      0.0883024619, 0.2817188376, 0.6299787005
+    ),
+    nrow = 3,
+    byrow = TRUE
+  )
+
+  m2 <- matrix(
+    c(
+      0.2104542553, 0.7936177850, -0.0040720468,
+      1.9779984951, -2.4285922050, 0.4505937099,
+      0.0259040371, 0.7827717662, -0.8086757660
+    ),
+    nrow = 3,
+    byrow = TRUE
+  )
+
+  lms <- m1 %*% rgb_lin
+  lms_cbrt <- lms^(1 / 3)
+  lab <- m2 %*% lms_cbrt
+
+  L <- lab[1, ]
+  a <- lab[2, ]
+  b_vals <- lab[3, ]
+
+  c_val <- sqrt(a^2 + b_vals^2)
+  h <- (atan2(b_vals, a) * 180 / pi) %% 360
+
+  l_out <- round(L, 4)
+  c_out <- round(c_val, 4)
+  h_out <- round(h, 4)
+  alpha_out <- round(alpha, 4)
+  h_out[c_out == 0] <- 0
+
+  if (length(hex_std) == 1) {
+    c(l = l_out, c = c_out, h = h_out, alpha = alpha_out)
+  } else {
+    data.frame(
+      l = l_out,
+      c = c_out,
+      h = h_out,
+      alpha = alpha_out,
+      stringsAsFactors = FALSE,
+      row.names = NULL
+    )
+  }
+}
+
+#' Convert Color Names to OKLCH
+#'
+#' Converts color names to OKLCH values using the internal color database of base R
+#' and extended color names.
+#'
+#' @param color A character vector of color names (e.g., "red", "sky blue", "forest green").
+#'   Color names are case-insensitive and whitespace is trimmed.
+#'
+#' @return If a single value is supplied, a named numeric vector with elements
+#'   \code{c(l, c, h, alpha)}. For multiple values, a data frame with columns
+#'   \code{l}, \code{c}, \code{h}, and \code{alpha}.
+#'
+#' @details
+#'
+#' This uses \code{\link{color_to_hex}} followed by
+#' \code{\link{hex_to_oklch}} for conversion.
+#'
+#' @seealso
+#' \code{\link{hex_to_oklch}} for converting hex codes,
+#' \code{\link{oklch_to_color}} for the reverse conversion,
+#' \code{\link{color_to_hex}} for color name lookup
+#'
+#' @export
+#' @examples
+#' # Convert a single color name
+#' color_to_oklch("red")
+#'
+#' # Convert multiple color names
+#' color_to_oklch(c("red", "blue", "green"))
+#'
+#' # Works with extended color names
+#' color_to_oklch(c("sunset orange", "arctic ocean"))
+color_to_oklch <- function(color) {
+  if (!is.character(color)) {
+    stop("Input must be a character vector of color names")
+  }
+
+  hex_codes <- color_to_hex(color)
+  hex_to_oklch(hex_codes)
+}

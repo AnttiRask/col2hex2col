@@ -1,5 +1,8 @@
+# color data cache to avoid recomputation
+.col2hex_cache_env <- new.env(parent = emptyenv())
+
 #' Get Color Database
-#'
+#' 
 #' Returns the complete color database as a data frame containing all 32,000+
 #' color names and their corresponding hexadecimal codes.
 #'
@@ -49,6 +52,10 @@
 #' sample_colors <- colors_df[sample(nrow(colors_df), 10), ]
 #' sample_colors
 get_color_data <- function() {
+  if (!is.null(.col2hex_cache_env$color_data_cache)) {
+    return(.col2hex_cache_env$color_data_cache)
+  }
+
   # Create data frame from internal lookup vector
   df <- data.frame(
     name = names(colornames_name_to_hex_vector),
@@ -57,6 +64,14 @@ get_color_data <- function() {
     row.names = NULL
   )
 
+  # Pre-compute Lab coordinates if farver is available
+  if (requireNamespace("farver", quietly = TRUE)) {
+    lab <- farver::decode_colour(df$hex, to = "lab")
+    colnames(lab) <- c("lab_l", "lab_a", "lab_b")
+    df <- cbind(df, lab)
+  }
+
   # Sort by name for easier browsing
-  df[order(df$name), ]
+  .col2hex_cache_env$color_data_cache <- df[order(df$name), ]
+  .col2hex_cache_env$color_data_cache
 }
