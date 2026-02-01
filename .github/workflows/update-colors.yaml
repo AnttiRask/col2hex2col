@@ -21,10 +21,11 @@ jobs:
           r-version: 'release'
           use-public-rspm: true
 
-      - name: Install dependencies
-        run: |
-          install.packages(c("usethis", "devtools"), repos = "https://cloud.r-project.org")
-        shell: Rscript {0}
+      - uses: r-lib/actions/setup-r-dependencies@v2
+        with:
+          packages: |
+            any::usethis
+            any::devtools
 
       - name: Download latest color database
         run: |
