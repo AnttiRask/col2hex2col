@@ -9,12 +9,15 @@ on:
     - cron: '0 0 1 * *'
   workflow_dispatch:  # Allow manual triggering
 
+permissions:
+  contents: write
+
 jobs:
   check-update:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
       - uses: r-lib/actions/setup-r@v2
         with:
@@ -48,26 +51,11 @@ jobs:
           source("data-raw/prepare_colornames.R")
         shell: Rscript {0}
 
-      - name: Create Pull Request
+      - name: Commit and push changes
         if: steps.check-changes.outputs.changed == 'true'
-        uses: peter-evans/create-pull-request@v5
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          commit-message: "Update color database from color-names repository"
-          title: "Update color database"
-          body: |
-            ## Color Database Update
-
-            The [color-names](https://github.com/meodai/color-names) database has been updated.
-
-            This PR updates:
-            - `data-raw/colornames.csv` with the latest color names
-            - `R/sysdata.rda` with rebuilt lookup tables
-
-            **Review checklist**:
-            - [ ] Run `devtools::test()` to ensure all tests pass
-            - [ ] Run `devtools::check()` to ensure package is valid
-            - [ ] Review the number of colors added/changed
-            - [ ] Update NEWS.md if this will be in a new release
-          branch: update-color-database
-          delete-branch: true
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add data-raw/colornames.csv R/sysdata.rda
+          git commit -m "Update color database from color-names repository"
+          git push
