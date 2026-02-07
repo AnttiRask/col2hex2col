@@ -1,3 +1,19 @@
+# col2hex2col 0.5.2
+
+## Bug Fixes
+
+* Fixed color count test to use `>=` threshold instead of exact count, preventing test failures when the color database is updated
+* Fixed test warning for 8-digit hex codes triggering fallback
+
+## Data
+
+* Updated color database with 29 new colors from the color-names repository
+
+## Documentation
+
+* Replaced hardcoded "32,462" color count with "32,000+" throughout docs and README
+* Fixed update-colors GitHub Actions workflow (dependency installation, caching, permissions)
+
 # col2hex2col 0.5.1
 
 ## Documentation
