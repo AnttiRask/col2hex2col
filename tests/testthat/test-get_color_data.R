@@ -15,8 +15,8 @@ test_that("get_color_data has correct columns", {
 
 test_that("get_color_data contains expected number of colors", {
   result <- get_color_data()
-  # Should have 32,462 colors
-  expect_equal(nrow(result), 32462)
+  # Database grows over time; should always have at least 32,000 colors
+  expect_gte(nrow(result), 32000)
 })
 
 test_that("get_color_data colors are formatted correctly", {

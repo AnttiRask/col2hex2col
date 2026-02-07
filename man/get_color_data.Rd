@@ -15,7 +15,7 @@ A data frame with the following columns:
 the \code{farver} package is available}
 }
 
-The data frame contains 32,462 rows representing all available colors,
+The data frame contains over 32,000 rows representing all available colors,
 including both R's 657 built-in colors and the extended color-names database.
 }
 \description{

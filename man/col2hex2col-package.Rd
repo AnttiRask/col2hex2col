@@ -60,7 +60,7 @@ Useful links:
 
 Other contributors:
 \itemize{
-  \item Yann Cohen (iamYannC) [contributor]
+  \item Yann Cohen [contributor]
 }
 
 }

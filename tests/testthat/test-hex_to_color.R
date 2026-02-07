@@ -141,7 +141,8 @@ test_that("hex_to_color handles mixed 6 and 8 digit codes", {
 test_that("hex_to_color 8-digit codes work with paletteer output", {
   # Simulate paletteer-style output (8-digit hex with FF alpha)
   paletteer_style <- c("#FFF5DCFF", "#FCEFD1FF", "#F9E9C6FF")
-  result <- hex_to_color(paletteer_style)
+  # Some of these may not have exact matches, triggering fallback warning
+  result <- suppressWarnings(hex_to_color(paletteer_style))
 
   # Should return character vector (not error)
   expect_type(result, "character")
