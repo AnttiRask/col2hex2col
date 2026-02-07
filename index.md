@@ -99,7 +99,7 @@ hex_to_color(hex_codes)
 ### Explore and visualize the color database
 
 ``` r
-# Get all 32,462 colors as a data frame
+# Get all 32,000+ colors as a data frame
 colors_df <- get_color_data()
 head(colors_df)
 #>                          name     hex    lab_l     lab_a     lab_b

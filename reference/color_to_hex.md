@@ -40,9 +40,9 @@ The function performs input validation and will raise an error if:
 - Any invalid color names are provided
 
 This function is vectorized and efficiently handles both single colors
-and vectors of multiple colors. The extended database includes 32,462
-unique color names from various sources, making it suitable for a wide
-range of color specification needs.
+and vectors of multiple colors. The extended database includes over
+32,000 unique color names from various sources, making it suitable for a
+wide range of color specification needs.
 
 Color name matching is case-insensitive: "Red", "red", and "RED" all
 match the same color.
