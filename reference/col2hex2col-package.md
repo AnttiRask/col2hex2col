@@ -63,8 +63,9 @@ Useful links:
 
 ## Author
 
-**Maintainer**: Antti Rask <anttilennartrask@gmail.com>
+**Maintainer**: Antti Rask <anttilennartrask@gmail.com> \[copyright
+holder\]
 
 Other contributors:
 
-- Yann Cohen \[contributor\]
+- Yann Cohen (iamYannC) \[contributor\]

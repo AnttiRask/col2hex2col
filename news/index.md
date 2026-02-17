@@ -1,5 +1,13 @@
 # Changelog
 
+## col2hex2col 0.5.3
+
+### Administrative
+
+- Added `LICENSE.md` file so GitHub correctly displays the MIT license
+- Updated LICENSE year to 2026
+- Added copyright holder (`[cph]`) role to `Authors@R` in DESCRIPTION
+
 ## col2hex2col 0.5.2
 
 ### Bug Fixes
