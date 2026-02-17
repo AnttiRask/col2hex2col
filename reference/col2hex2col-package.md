@@ -68,4 +68,4 @@ holder\]
 
 Other contributors:
 
-- Yann Cohen (iamYannC) \[contributor\]
+- Yann Cohen (GitHub: iamYannC) \[contributor\]
