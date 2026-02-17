@@ -6,7 +6,7 @@ Authors@R: c(
     person("Antti", "Rask", email = "anttilennartrask@gmail.com",
            role = c("aut", "cre", "cph")),
     person("Yann", "Cohen", role = "ctb",
-           comment = c(GitHub = "iamYannC"))
+           comment = "GitHub: iamYannC")
     )
 Description: Provides simple functions to convert between color names and
     hexadecimal color codes using an extensive database of over 32,000 colors.
