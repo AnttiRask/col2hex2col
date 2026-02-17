@@ -50,3 +50,6 @@ rsconnect/
 
 # Development folder (notes, test scripts, planning docs)
 .dev/
+
+# Claude Code local settings
+.claude/

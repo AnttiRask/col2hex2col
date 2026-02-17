@@ -9,6 +9,7 @@
 ^data-raw$
 ^img$
 ^\.dev$
+^\.claude$
 ^_pkgdown\.yml$
 ^docs$
 ^pkgdown$
