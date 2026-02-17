@@ -56,11 +56,11 @@ Useful links:
 
 }
 \author{
-\strong{Maintainer}: Antti Rask \email{anttilennartrask@gmail.com}
+\strong{Maintainer}: Antti Rask \email{anttilennartrask@gmail.com} [copyright holder]
 
 Other contributors:
 \itemize{
-  \item Yann Cohen [contributor]
+  \item Yann Cohen (iamYannC) [contributor]
 }
 
 }

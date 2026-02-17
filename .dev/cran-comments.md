@@ -2,7 +2,7 @@
 
 0 errors | 0 warnings | 0 notes
 
-## Update from 0.3.1 to 0.5.2
+## Update from 0.3.1 to 0.5.3
 
 This is an update to an existing CRAN package. Changes since the last CRAN release (0.3.1):
 
@@ -28,6 +28,11 @@ This is an update to an existing CRAN package. Changes since the last CRAN relea
 * Updated color database with new colors from upstream
 * Replaced hardcoded color counts with "32,000+" in docs
 * Fixed update-colors GitHub Actions workflow
+
+### Version 0.5.3
+* Added `LICENSE.md` file so GitHub correctly displays the MIT license
+* Updated LICENSE year to 2026
+* Added copyright holder (`[cph]`) role to `Authors@R` in DESCRIPTION
 
 ## Test environments
 
