@@ -9,7 +9,7 @@
 ## Citation
 
 Source:
-[`DESCRIPTION`](https://github.com/AnttiRask/col2hex2col/blob/v0.5.2/DESCRIPTION)
+[`DESCRIPTION`](https://github.com/AnttiRask/col2hex2col/blob/main/DESCRIPTION)
 
 Rask A (2026). *col2hex2col: Convert Between Color Names and Hex Codes*.
 R package version 0.5.2, <https://github.com/AnttiRask/col2hex2col>.
