@@ -273,13 +273,13 @@ Aged Wine,#895460
 Ageing Barrel,#6a5b4e
 Ageless,#ececdf
 Ageless Beauty,#e7a995
+Aggressive Aqua,#00fbff
 Aggressive Baby Blue,#6fffff
 Aggressive Salmon,#ff7799
 Agrax Earthshade,#393121
 Agreeable Green,#8e9683
 Agrellan Badland,#ffb347
 Agrellan Earth,#a17c59
-Agressive Aqua,#00fbff
 Agrodolce,#f0e2d3
 Agua Fría,#9fc5cc
 Ahaetulla Prasina,#00fa92
@@ -622,7 +622,6 @@ American Mahogany,#52352f
 American Milking Devon,#63403a
 American Orange,#ff8b00
 American Pink,#ff9899
-American Purple,#431c53
 American Red,#b32134
 American River,#626e71
 American Roast,#995544
@@ -2472,7 +2471,6 @@ Berta Blue,#45dcff
 Beru,#bfe4d4
 Berwick Berry,#7082a4
 Beryl,#71dcb8
-Beryl Black Green,#2b322d
 Beryl Green,#bcbfa8
 Beryl Pearl,#e2e3df
 Beryl Red,#a16381
@@ -2572,7 +2570,6 @@ Billowing Sail,#d2e3e3
 Billowing Smoke,#6e726a
 Billowy Breeze,#afc7cd
 Billowy Clouds,#f6f0e9
-Billowy Down,#eff0e9
 Billycart Blue,#4c77a4
 Biloba Flower,#ae99d2
 Biloxi,#f4e4cd
@@ -3596,7 +3593,6 @@ Boston Brick,#87544e
 Boston Brown Bread,#614432
 Boston Fern,#90966d
 Boston Legacy,#685043
-Boston University Red,#cc0002
 Bōtan,#a2345c
 Botanical,#4d6e2f
 Botanical Beauty,#227700
@@ -3605,6 +3601,7 @@ Botanical Garden,#44aa11
 Botanical Green,#77976e
 Botanical Night,#12403c
 Botanical Tint,#a7e6d4
+Botanist,#9ad28c
 Botticelli,#b70272
 Botticelli Angel,#fbdfd6
 Bottle Glass,#238e50
@@ -4105,7 +4102,6 @@ Brutal Pink,#ff00bb
 Brutally Blue,#0022dd
 Bryophyte,#a6bea6
 Bryopsida Green,#9fe010
-Bubbelgum Heart,#ffbadf
 Bubble Algae,#90e4c1
 Bubble Bath,#e8e0e9
 Bubble Bobble Green,#00b800
@@ -4117,6 +4113,7 @@ Bubblegum Baby Girl,#cc55ee
 Bubblegum Beam,#f887c7
 Bubblegum Bright,#ff01b7
 Bubblegum Crisis,#eeccee
+Bubblegum Heart,#ffbadf
 Bubblegum Kisses,#f092d6
 Bubblegum Pink,#f6b0ba
 Bubbles,#e7feff
@@ -6041,6 +6038,7 @@ Clay Terrace,#d4823c
 Clayton,#83756c
 Claytone,#969283
 Clean Air,#d8ddb6
+Clean Buffer,#eff0e9
 Clean Canvas,#f6e9d3
 Clean Green,#8fe0c6
 Clean Pool,#4ec0ed
@@ -7052,6 +7050,7 @@ Creek Bay,#ab9d89
 Creek Bend,#928c87
 Creek Pebble,#dbd7d9
 Creeping Bellflower,#b48ac2
+Creeping Death,#041723
 Crema,#c16104
 Crème,#ffffb6
 Creme Angels,#f8ede2
@@ -8600,6 +8599,7 @@ Drop Green,#69bd5a
 Drop of Lemon,#fcf1bd
 Droplet,#aaddff
 Dropped Brick,#bb3300
+Drops of God,#571e2f
 Drops of Honey,#d4ae76
 Drought,#d5d1cc
 Drover,#fbeb9b
@@ -13361,6 +13361,7 @@ Historical Ruins,#bfb9a7
 Hisui Kingfisher,#38b48b
 Hit Grey,#a1adb5
 Hit Pink,#fda470
+Hit the Hay,#efc872
 Hitchcock Milk,#eeffa9
 Hitching Post,#c48d69
 Hitsujiyama Pink,#ee66ff
@@ -13373,6 +13374,7 @@ Hoeth Blue,#57a9d4
 Hog Bristle,#dcd1bb
 Hog-Maw,#fbe8e4
 Hog’s Pudding,#dad5c7
+Hōjicha,#424f3b
 Hokey Pokey,#bb8e34
 Hoki,#647d86
 Hokkaido Lavender,#7736d9
@@ -13411,6 +13413,7 @@ Hollywood Cerise,#f400a0
 Hollywood Golden Age,#ecd8b1
 Hollywood Starlet,#f2d082
 Holmes Cream,#dbbb9e
+Holographic Lavender,#f0e5f5
 Holy Cannoli,#db783e
 Holy Crow,#332f2c
 Holy Ghost,#efe9e6
@@ -15315,7 +15318,6 @@ Lavender Blaze,#b68fc3
 Lavender Blessing,#d3b8c5
 Lavender Bliss,#cec3dd
 Lavender Blossom,#b57edc
-Lavender Blossom Grey,#8c8da1
 Lavender Blue,#ccccff
 Lavender Blue Shadow,#8b88f8
 Lavender Blush,#fff0f5
@@ -17085,6 +17087,7 @@ Matador’s Cape,#cf6e66
 Match Head,#d63756
 Match Strike,#ffaa44
 Matcha,#d8d458
+Matcha Ash,#35382d
 Matcha Mecha,#9faf6c
 Matcha Picchu,#99bb00
 Matcha Powder,#a0d404
@@ -17593,6 +17596,7 @@ Midnight Blue,#020035
 Midnight Blush,#979fbf
 Midnight Brown,#706048
 Midnight Clover,#3c574e
+Midnight Crest,#112473
 Midnight Dreams,#002233
 Midnight Edition,#0c121b
 Midnight Escapade,#2b3458
@@ -21791,6 +21795,7 @@ Plumville,#9e8185
 Plunder,#5072a9
 Plunge,#035568
 Plunge Pool,#00ffcc
+Plunged Into Darkness,#431c53
 Plunging Waterfall,#8cd4df
 Plus Ultra,#78ac01
 Plush,#3b3549
@@ -25664,6 +25669,7 @@ Sightful,#76a4a6
 Sigmarite,#caad76
 Sign of Spring,#e3ede2
 Sign of the Crown,#fce299
+Signal,#cc0002
 Signal Green,#33ff00
 Signal Grey,#838684
 Signal Pink,#b15384
@@ -27030,6 +27036,7 @@ St. Nicholas Beard,#eedddd
 St. Patrick,#2b8c4e
 St. Patrick’s Blue,#23297a
 St. Petersburg,#dee8f3
+St. Tropaz,#39527d
 St. Tropez,#325482
 Stability,#c1d0b2
 Stable Hay,#f6e0be
@@ -28484,6 +28491,7 @@ Tentacle Pink,#ffbacd
 Tenzing,#9ecfd9
 Tequila,#f4d0a4
 Teri-Gaki Persimmon,#eb6238
+Terminal Black,#2b322d
 Terminator Chrome,#dcdfe5
 Terminatus Stone,#bdb192
 Termite Beige,#ddbb66
@@ -31817,7 +31825,6 @@ Zen Pebble,#bab8ad
 Zen Retreat,#5b5d5c
 Zenith,#497a9f
 Zenith Heights,#a6c8c7
-Zepheniah’s Greed,#424f3b
 Zephyr,#c39ea3
 Zephyr Green,#7ab091
 Zero Degrees,#ddd9c4
