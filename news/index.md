@@ -2,6 +2,8 @@
 
 ## col2hex2col 0.5.3
 
+CRAN release: 2026-02-17
+
 ### Administrative
 
 - Added `LICENSE.md` file so GitHub correctly displays the MIT license

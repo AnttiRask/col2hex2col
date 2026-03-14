@@ -30,7 +30,7 @@ color names and their corresponding hexadecimal codes."><meta property="og:image
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.png" class="logo" alt=""><h1>Get Color Database</h1>
-      <small class="dont-index">Source: <a href="https://github.com/AnttiRask/col2hex2col/blob/v0.5.3/R/color_data.R" class="external-link"><code>R/color_data.R</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/AnttiRask/col2hex2col/blob/main/R/color_data.R" class="external-link"><code>R/color_data.R</code></a></small>
       <div class="d-none name"><code>get_color_data.Rd</code></div>
     </div>
 
@@ -93,7 +93,7 @@ the same hex code.</p>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># See dimensions</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/dim.html" class="external-link">dim</a></span><span class="op">(</span><span class="va">colors_df</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 32491     5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 32498     5</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Find all colors containing "blue"</span></span></span>
 <span class="r-in"><span><span class="va">blue_colors</span> <span class="op">&lt;-</span> <span class="va">colors_df</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/grep.html" class="external-link">grepl</a></span><span class="op">(</span><span class="st">"blue"</span>, <span class="va">colors_df</span><span class="op">$</span><span class="va">name</span><span class="op">)</span>, <span class="op">]</span></span></span>
@@ -110,17 +110,17 @@ the same hex code.</p>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">123</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">sample_colors</span> <span class="op">&lt;-</span> <span class="va">colors_df</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/sample.html" class="external-link">sample</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html" class="external-link">nrow</a></span><span class="op">(</span><span class="va">colors_df</span><span class="op">)</span>, <span class="fl">10</span><span class="op">)</span>, <span class="op">]</span></span></span>
 <span class="r-in"><span><span class="va">sample_colors</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                       name     hex    lab_l      lab_a       lab_b</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 18847        mountain haze #6C6E7E 46.77205  2.7544761  -9.0851710</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 18895             moussaka #6D2A13 26.60659 28.4318941  29.0706789</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 26803             snowbank #E8E9E9 92.27247 -0.3276542  -0.1136430</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 25102       samovar silver #B8BEBE 76.51803 -2.0688197  -0.7204286</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 28867              tarsier #825E61 43.67579 15.1653023   4.0932861</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2986  bloodthirsty vampire #9B0503 32.00202 54.5542983  44.6157270</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1842        bales of brown #CF994B 66.94463 12.1018690  47.9548849</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 25718         self powered #8C7591 52.22250 14.2645424 -11.8382688</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3371        blue wing teal #2E4556 28.13737 -3.7256212 -12.9321952</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 29925          tulip white #F1E5D1 91.38968  0.8005547  11.2141099</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                   name     hex    lab_l     lab_a      lab_b</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 18847     mountain fog #F4DBC7 88.93261  5.496830  12.981662</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 18895    mouse catcher #9E928F 61.49035  3.900251   3.191081</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 26803 snow white blush #F8AFA9 78.16035 25.912121  13.784678</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 25102            samba #AA262B 38.03819 52.655923  30.789569</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 28867  tarnished brass #7F6C24 46.13054 -1.040181  41.341231</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2986       bloody mary #BA0105 38.68238 63.133555  51.082415</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1842        bali batik #6F5937 39.24273  4.198661  23.018862</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 25718   sekichiku pink #E5ABBE 75.76382 24.063856  -1.354879</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3371       blue yonder #5A77A8 49.72978  3.172326 -29.439636</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 29925   tuileries tint #B89CBC 67.72385 16.091490 -12.653178</span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>

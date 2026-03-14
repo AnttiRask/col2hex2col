@@ -74,7 +74,7 @@ head(colors_df)
 
 # See dimensions
 dim(colors_df)
-#> [1] 32491     5
+#> [1] 32498     5
 
 # Find all colors containing "blue"
 blue_colors <- colors_df[grepl("blue", colors_df$name), ]
@@ -91,15 +91,15 @@ head(blue_colors)
 set.seed(123)
 sample_colors <- colors_df[sample(nrow(colors_df), 10), ]
 sample_colors
-#>                       name     hex    lab_l      lab_a       lab_b
-#> 18847        mountain haze #6C6E7E 46.77205  2.7544761  -9.0851710
-#> 18895             moussaka #6D2A13 26.60659 28.4318941  29.0706789
-#> 26803             snowbank #E8E9E9 92.27247 -0.3276542  -0.1136430
-#> 25102       samovar silver #B8BEBE 76.51803 -2.0688197  -0.7204286
-#> 28867              tarsier #825E61 43.67579 15.1653023   4.0932861
-#> 2986  bloodthirsty vampire #9B0503 32.00202 54.5542983  44.6157270
-#> 1842        bales of brown #CF994B 66.94463 12.1018690  47.9548849
-#> 25718         self powered #8C7591 52.22250 14.2645424 -11.8382688
-#> 3371        blue wing teal #2E4556 28.13737 -3.7256212 -12.9321952
-#> 29925          tulip white #F1E5D1 91.38968  0.8005547  11.2141099
+#>                   name     hex    lab_l     lab_a      lab_b
+#> 18847     mountain fog #F4DBC7 88.93261  5.496830  12.981662
+#> 18895    mouse catcher #9E928F 61.49035  3.900251   3.191081
+#> 26803 snow white blush #F8AFA9 78.16035 25.912121  13.784678
+#> 25102            samba #AA262B 38.03819 52.655923  30.789569
+#> 28867  tarnished brass #7F6C24 46.13054 -1.040181  41.341231
+#> 2986       bloody mary #BA0105 38.68238 63.133555  51.082415
+#> 1842        bali batik #6F5937 39.24273  4.198661  23.018862
+#> 25718   sekichiku pink #E5ABBE 75.76382 24.063856  -1.354879
+#> 3371       blue yonder #5A77A8 49.72978  3.172326 -29.439636
+#> 29925   tuileries tint #B89CBC 67.72385 16.091490 -12.653178
 ```
